@@ -141,6 +141,8 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/modes
     chown system graphics /sys/class/graphics/fb0/srgb
     chmod 0664 /sys/class/graphics/fb0/srgb
+    chown system graphics /sys/devices/virtual/graphics/fb0/mdp/bw_mode_bitmap
+    chmod 0664 /sys/devices/virtual/graphics/fb0/mdp/bw_mode_bitmap
 
     #LED permissions
     chown system system /sys/class/leds/red/blink

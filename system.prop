@@ -78,6 +78,7 @@ ro.sys.fw.dex2oat_thread_count=4
 debug.sf.hw=0
 debug.egl.hw=0
 debug.enable.sglscale=1
+debug.cpurend.vsync=false
 debug.mdpcomp.idletime=600
 debug.mdpcomp.logs=0
 debug.sf.latch_unsignaled=1

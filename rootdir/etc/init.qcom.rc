@@ -422,6 +422,12 @@ service imsdatadaemon /system/vendor/bin/imsdatadaemon
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
+service per_mgr /system/vendor/bin/pm-service
+    class core
+    user system
+    group system net_raw
+    writepid /dev/cpuset/system-background/tasks
+
 service ppd /system/vendor/bin/mm-pp-daemon
     class late_start
     disabled

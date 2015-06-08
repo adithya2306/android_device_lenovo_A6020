@@ -667,6 +667,7 @@ case "$target" in
         # HMP scheduler settings for 8916, 8936, 8939, 8929
         echo 3 > /proc/sys/kernel/sched_window_stats_policy
         echo 3 > /proc/sys/kernel/sched_ravg_hist_size
+        echo 9 > /proc/sys/kernel/sched_upmigrate_min_nice
 
         # Apply governor settings for 8916
         case "$soc_id" in

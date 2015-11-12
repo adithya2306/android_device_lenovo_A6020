@@ -205,7 +205,7 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
 service wcnss-service /system/bin/wcnss_service
-    class main
+    class late_start
     user system
     group system wifi radio
     oneshot

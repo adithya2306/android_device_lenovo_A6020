@@ -54,6 +54,11 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
 
+# AOSP packages
+PRODUCT_PACKAGES += \
+    Terminal \
+    WallpaperPicker
+
 # APEX
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ld.config.txt:system/etc/swcodec/ld.config.txt
@@ -346,4 +351,5 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.setupwizard.rotation_locked=true \
     ro.com.google.clientidbase=android-lenovo \
     ro.adb.secure=0 \
-    net.tethering.noprovisioning=true
+    net.tethering.noprovisioning=true \
+    ro.storage_manager.enabled=true

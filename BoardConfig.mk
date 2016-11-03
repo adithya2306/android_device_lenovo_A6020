@@ -208,7 +208,8 @@ TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_atomic.so \
     /system/lib/hw/camera.vendor.msm8916.so|libshim_atomic.so \
     /system/lib/libmmjpeg_interface.so|libshim_atomic.so \
-    /system/vendor/lib/libmmcamera2_imglib_modules.so|libshim_atomic.so
+    /system/vendor/lib/libmmcamera2_imglib_modules.so|libshim_atomic.so \
+    /system/vendor/lib64/lib-imsdpl.so|libshims_boringssl.so
 
 
 # Wifi

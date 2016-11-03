@@ -201,11 +201,12 @@ TARGET_SYSTEM_PROP += device/lenovo/A6020/system.prop
 
 # Shims
 TARGET_LD_SHIM_LIBS := \
+    /system/lib/hw/camera.vendor.msm8916.so|libshim_atomic.so \
+    /system/lib/libmmjpeg_interface.so|libshim_atomic.so \
     /system/vendor/lib/libmmcamera2_imglib_modules.so|libshim_atomic.so \
     /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_gui.so \
     /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_atomic.so \
-    /system/lib/hw/camera.vendor.msm8916.so|libshim_atomic.so \
-    /system/lib/libmmjpeg_interface.so|libshim_atomic.so \
+    /system/vendor/lib64/lib-imsdpl.so|libshims_boringssl.so
 
 # Vendor security patch level
 VENDOR_SECURITY_PATCH := 2016-10-01

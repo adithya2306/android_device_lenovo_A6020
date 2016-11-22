@@ -54,7 +54,9 @@ on early-boot
     write /sys/bus/msm_subsys/devices/subsys1/restart_level "related"
     # Modem
     write /sys/bus/msm_subsys/devices/subsys2/restart_level "related"
-    write /sys/kernel/boot_adsp/boot 1
+
+    # Busy loop to wait for devices booted by devstart_sh just in case device not ready
+    exec - root root system -- /system/etc/init.qcom.devwait.sh
 
 on boot
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -138,6 +140,10 @@ on fs
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     mount_all fstab.qcom
     restorecon_recursive /persist
+
+on post-fs
+    # Start devices by sysfs trigger
+    start devstart_sh
 
 on post-fs-data
     # Create folder for mm-qcamera-daemon
@@ -396,5 +402,12 @@ on property:init.svc.surfaceflinger=restarting
     start hwcomposer-2-1
 
 service qcom-mem /system/vendor/bin/sh /system/etc/init.qcom.mem.sh
+    disabled
+    oneshot
+
+service devstart_sh /system/etc/init.qcom.devstart.sh
+    class main
+    user root
+    group root system
     disabled
     oneshot

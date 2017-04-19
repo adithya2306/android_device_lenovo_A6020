@@ -126,6 +126,9 @@ TARGET_SYSTEM_PROP += $(LOCAL_PATH)/system.prop
 USE_DEVICE_SPECIFIC_GPS := true
 TARGET_NO_RPC := true
 
+# HIDL
+DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
+
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
 

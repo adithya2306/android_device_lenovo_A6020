@@ -129,6 +129,9 @@ on boot
     chown system system /sys/class/leds/blue/led_time
     chown system system /sys/class/leds/blue/brightness
 
+    # Permissions required for power HAL
+    chown system system /sys/devices/system/cpu/cpu0/core_ctl/max_cpus
+
 on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice

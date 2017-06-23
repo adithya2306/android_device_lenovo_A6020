@@ -1,6 +1,7 @@
 # system.prop for A6020
 
 # Audio
+ro.config.media_vol_steps=25
 ro.vendor.audio.sdk.fluencetype=fluence
 ro.vendor.audio.sdk.ssr=false
 persist.vendor.audio.fluence.voicecall=true

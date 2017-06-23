@@ -6,6 +6,7 @@ ro.vendor.audio.sdk.ssr=false
 persist.vendor.audio.fluence.voicecall=true
 persist.vendor.audio.fluence.voicerec=true
 persist.vendor.audio.fluence.speaker=false
+ro.config.media_vol_steps=25
 vendor.voice.path.for.pcm.voip=true
 vidc.enc.narrow.searchrange=1
 vendor.audio.tunnel.encode = false

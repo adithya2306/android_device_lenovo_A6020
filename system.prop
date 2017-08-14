@@ -94,6 +94,7 @@ ro.vendor.qti.sys.fw.bservice_enable=true
 # Qualcomm
 persist.data.qmi.adb_logmask=0
 ro.qualcomm.cabl=0
+ro.sys.fw.dex2oat_thread_count=8
 
 #low audio flinger standby delay to reduce power consumption
 ro.audio.flinger_standbytime_ms=300

@@ -275,6 +275,12 @@ service time_daemon /system/vendor/bin/time_daemon
     group root
     writepid /dev/cpuset/system-background/tasks
 
+service power_off_alarm /system/vendor/bin/power_off_alarm
+    class core
+    group system
+    disabled
+    oneshot
+
 service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
     class main
     user root
@@ -367,6 +373,7 @@ on charger
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
     load_system_props
     start vm_bms
+    start power_off_alarm
     
 service vm_bms /system/vendor/bin/vm_bms
     class main

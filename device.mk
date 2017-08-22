@@ -314,6 +314,8 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd_default.conf \
     hostapd \
+    libwpa_client \
+    wcnss_service \
     wificond \
     wifilogd \
     wpa_supplicant \
@@ -323,12 +325,6 @@ PRODUCT_PACKAGES += \
     p2p_supplicant_overlay.conf \
     wpa_supplicant_overlay.conf \
     WCNSS_qcom_cfg.ini
-
-PRODUCT_PACKAGES += \
-    libqsap_sdk \
-    libQWiFiSoftApCfg \
-    wcnss_service \
-    libwpa_client
 
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service

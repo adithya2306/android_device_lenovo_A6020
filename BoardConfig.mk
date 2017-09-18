@@ -206,7 +206,8 @@ TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib/libmmcamera2_imglib_modules.so|libshim_atomic.so \
     /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_gui.so \
     /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_atomic.so \
-    /system/vendor/lib64/lib-imsdpl.so|libshims_boringssl.so
+    /system/vendor/lib64/lib-imsdpl.so|libshims_boringssl.so \
+    /system/vendor/lib64/lib-imsvt.so|libshims_ims.so
 
 # Vendor security patch level
 VENDOR_SECURITY_PATCH := 2016-10-01

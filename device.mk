@@ -178,7 +178,8 @@ PRODUCT_COPY_FILES += \
 
 # IMS
 PRODUCT_PACKAGES += \
-    libshims_boringssl
+    libshims_boringssl \
+    libshims_ims
 
 # Keylayout
 PRODUCT_COPY_FILES += \

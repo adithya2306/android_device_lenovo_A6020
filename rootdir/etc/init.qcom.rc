@@ -224,11 +224,12 @@ on post-fs-data
     start vm_bms
     setprop vold.post_fs_data_done 1
 
-service wcnss-service /system/bin/wcnss_service
+service wcnss-service /system/vendor/bin/wcnss_service
     class late_start
     user system
     group system wifi radio
     oneshot
+    writepid /dev/cpuset/system-background/tasks
 
 #start camera server as daemon
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon

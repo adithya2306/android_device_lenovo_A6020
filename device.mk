@@ -292,6 +292,7 @@ PRODUCT_COPY_FILES += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
+    init.safailnet.rc \
     init.qcom.usb.rc \
     init.qcom.bt.sh \
     init.qcom.rc \
@@ -299,7 +300,6 @@ PRODUCT_PACKAGES += \
     init.qcom.mem.sh \
     init.qcom.post_boot.sh \
     ueventd.qcom.rc
-
 
 # Seccomp
 PRODUCT_COPY_FILES += \

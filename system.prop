@@ -58,6 +58,10 @@ ro.opengles.version=196609
 # DRM
 drm.service.enabled=1
 
+# Fling velocities
+ro.min.fling_velocity=160
+ro.max.fling_velocity=20000
+
 # Media
 mm.enable.smoothstreaming=true
 mmp.enable.3g2=true

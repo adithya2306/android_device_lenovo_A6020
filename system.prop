@@ -70,6 +70,7 @@ debug.egl.hw=0
 debug.enable.sglscale=1
 debug.mdpcomp.idletime=600
 debug.mdpcomp.logs=0
+debug.sf.recomputecrop=0
 dev.pm.dyn_samplingrate=1
 persist.hwc.mdpcomp.enable=true
 persist.hwc.ptor.enable=true

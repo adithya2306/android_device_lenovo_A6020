@@ -218,6 +218,17 @@ on enable-low-power
     write /dev/cpuset/top-app/cpus 0-7
     write /dev/cpuset/camera-daemon/cpus 4-7
 
+    # disable wakelocks
+    write /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws 0
+    write /sys/module/wakeup/parameters/enable_wlan_extscan_wl_ws 0
+    write /sys/module/wakeup/parameters/enable_ipa_ws 0
+    write /sys/module/wakeup/parameters/enable_wlan_ws 0
+    write /sys/module/wakeup/parameters/enable_timerfd_ws 0
+    write /sys/module/wakeup/parameters/enable_netlink_ws 0
+    write /sys/module/wakeup/parameters/enable_netmgr_wl_ws 0
+    write /sys/module/wakeup/parameters/enable_wlan_pno_wl_ws 0
+    write /sys/module/wakeup/parameters/enable_wcnss_filter_lock_ws 0
+
     setprop ro.min_freq_0 200000
     setprop ro.min_freq_4 800000
 

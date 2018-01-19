@@ -237,28 +237,27 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    dhcpcd.conf \
-    hostapd_default.conf \
     hostapd \
+    libQWiFiSoftApCfg \
+    libqsap_sdk \
+    libwpa_client \
     wificond \
     wifilogd \
-    wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant
 
 PRODUCT_PACKAGES += \
+    dhcpcd.conf \
+    hostapd_default.conf \
     p2p_supplicant_overlay.conf \
-    wpa_supplicant_overlay.conf
-
-PRODUCT_PACKAGES += \
+    wpa_supplicant.conf \
+    wpa_supplicant_overlay.conf \
     WCNSS_qcom_cfg.ini
 
-PRODUCT_PACKAGES += \
-    libqsap_sdk \
-    libQWiFiSoftApCfg \
-    libwpa_client
-
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
+    $(LOCAL_PATH)/wifi/hostapd.deny:system/etc/hostapd/hostapd.deny \
+    $(LOCAL_PATH)/wifi/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini
 
 # Ramdisk
 PRODUCT_PACKAGES += \

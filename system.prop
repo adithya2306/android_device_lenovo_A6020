@@ -110,6 +110,10 @@ persist.radio.add_power_save=1
 # Time
 persist.timed.enable=true
 
+# Touch response
+persist.vendor.qti.inputopts.enable=true
+persist.vendor.qti.inputopts.movetouchslop=0.6
+
 # UI
 sys.use_fifo_ui=1
 

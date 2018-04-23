@@ -34,6 +34,8 @@ on early-init
 
     write /sys/class/leds/lcd-backlight/brightness 100
 
+    write /proc/sys/kernel/sched_boost 1
+
 on init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
 
@@ -393,6 +395,8 @@ on property:sys.boot_completed=1
     # post-boot fs tune
     write /sys/block/mmcblk0/queue/read_ahead_kb 1024
     write /sys/block/mmcblk1/queue/read_ahead_kb 512
+
+    write /proc/sys/kernel/sched_boost 0
 
     # RPS mask
     write /sys/class/net/rmnet0/queues/rx-0/rps_cpus 10

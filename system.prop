@@ -80,6 +80,12 @@ persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 
+# Play store
+ro.com.google.clientidbase.am=android-lenovo
+ro.com.google.clientidbase.gmm=android-lenovo
+ro.com.google.clientidbase.ms=android-lenovo
+ro.com.google.clientidbase.yt=android-lenovo
+
 # RIL
 DEVICE_PROVISIONED=1
 persist.data.netmgrd.qos.enable=true

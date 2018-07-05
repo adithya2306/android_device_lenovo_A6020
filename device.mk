@@ -291,11 +291,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libqsap_sdk \
     libQWiFiSoftApCfg \
-    wcnss_service \
     libwpa_client
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
 
 # Ramdisk
 PRODUCT_PACKAGES += \

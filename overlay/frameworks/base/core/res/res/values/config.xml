@@ -368,4 +368,7 @@
          or lowmemorykiller.  Directly added to the default value chosen by
          ActivityManager based on screen size. -->
    <integer name="config_extraFreeKbytesAdjust">51200</integer>
+
+    <!-- Integer indicating wpa_supplicant scan interval in milliseconds -->
+    <integer translatable="false" name="config_wifi_supplicant_scan_interval">40000</integer>
 </resources>

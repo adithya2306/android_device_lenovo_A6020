@@ -331,6 +331,7 @@ on charger
     chmod 0664 /sys/class/power_supply/bms/voltage_ocv
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
+    load_system_props
     start vm_bms
     
 service vm_bms /system/vendor/bin/vm_bms
@@ -338,9 +339,10 @@ service vm_bms /system/vendor/bin/vm_bms
     user root
     group root wakelock
 
-service charger /charger
+service charger /sbin/poweroffcharge
     class charger
-    critical
+    user root
+    group root system graphics
 
 service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
     class core

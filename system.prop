@@ -11,6 +11,7 @@ ro.config.vc_call_vol_steps=7
 vendor.voice.path.for.pcm.voip=true
 vidc.enc.narrow.searchrange=1
 vendor.audio.tunnel.encode = false
+vendor.mediacodec.binder.size=6
 vendor.voice.playback.conc.disabled=true
 vendor.voice.record.conc.disabled=true
 vendor.voice.voip.conc.disabled=true
@@ -126,6 +127,9 @@ ril.subscription.types=NV,RUIM
 ro.telephony.call_ring.multiple=false
 telephony.lteOnCdmaDevice=0
 persist.radio.add_power_save=1 
+
+# Sensors
+persist.vendor.sensor.hw.binder.size=8
 
 # Time
 persist.timed.enable=true

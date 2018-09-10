@@ -121,6 +121,7 @@ TARGET_QCOM_NO_FM_FIRMWARE := true
 VENDOR_SECURITY_PATCH := 2016-10-01
 
 # System properties
+TARGET_SYSTEM_PROP += device/lenovo/A6020/system.prop
 
 # GPS
 USE_DEVICE_SPECIFIC_GPS := true

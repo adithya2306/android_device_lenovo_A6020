@@ -331,7 +331,7 @@
 	<item>DEBUG_LEVEL=2</item>
 	<item>INTERMEDIATE_POS=0</item>
 	<item>SUPL_VER=0x10000</item>
-        <item>SUPL_ES=0</item>
+        <item>SUPL_ES=1</item>
         <item>USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL=1</item>
         <item>CAPABILITIES=0x37</item>
         <item>LPP_PROFILE=2</item>

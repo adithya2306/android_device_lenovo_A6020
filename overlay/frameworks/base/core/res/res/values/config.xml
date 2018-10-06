@@ -351,4 +351,7 @@
 
     <!-- Integer indicating wpa_supplicant scan interval in milliseconds -->
     <integer translatable="false" name="config_wifi_supplicant_scan_interval">40000</integer>
+
+    <!-- IP address of the dns server to use if nobody else suggests one -->
+    <string name="config_default_dns_server" translatable="false">1.1.1.1</string>
 </resources>

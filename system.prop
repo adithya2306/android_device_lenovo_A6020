@@ -34,6 +34,24 @@ ro.bluetooth.hfp.ver=1.7
 ro.bluetooth.sap=true
 ro.qualcomm.bt.hci_transport=smd
 
+# Cloudflare DNS
+net.dns1=1.1.1.1
+net.dns2=1.0.0.1
+net.rmnet0.dns1=1.1.1.1
+net.rmnet0.dns2=1.0.0.1
+net.gprs.dns1=1.1.1.1
+net.gprs.dns2=1.0.0.1
+net.ppp0.dns1=1.1.1.1
+net.ppp0.dns2=1.0.0.1
+net.wlan0.dns1=1.1.1.1
+net.wlan0.dns2=1.0.0.1
+net.eth0.dns1=1.1.1.1
+net.eth0.dns2=1.0.0.1
+dhcp.eth0.dns1=1.1.1.1
+dhcp.eth0.dns2=1.0.0.1
+dhcp.wlan0.dns1=1.1.1.1
+dhcp.wlan0.dns2=1.0.0.1
+
 # Boot
 ro.build.shutdown_timeout=0
 sys.vendor.shutdown.waittime=500

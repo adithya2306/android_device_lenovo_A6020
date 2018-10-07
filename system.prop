@@ -151,6 +151,7 @@ ro.telephony.call_ring.multiple=false
 
 # Time
 persist.timed.enable=true
+persist.vendor.delta_time.enable=true
 
 # Vendor security patch level
 ro.lineage.build.vendor_security_patch=2016-10-01

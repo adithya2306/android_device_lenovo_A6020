@@ -176,6 +176,10 @@ PRODUCT_PACKAGES += \
     rild_socket \
     ril-wrapper
 
+# Telephony
+PRODUCT_PACKAGES += telephony-ext
+PRODUCT_BOOT_JARS += telephony-ext
+
 # Thermal
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine.conf

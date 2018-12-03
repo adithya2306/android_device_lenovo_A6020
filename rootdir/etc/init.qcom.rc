@@ -155,6 +155,12 @@ on late-fs
 
     mount_all fstab.qcom --late
 
+    # boot time fs tune
+    write /sys/block/mmcblk0/queue/iostats 0
+    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
+    write /sys/block/mmcblk0/queue/nr_requests 256
+    write /sys/block/mmcblk1/queue/read_ahead_kb 1024
+
 on post-fs
     # Allow writing to the kernel trace log.
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
@@ -423,7 +429,7 @@ service qcom-post-boot /system/vendor/bin/sh /system/etc/init.qcom.post_boot.sh
 on property:sys.boot_completed=1
     start qcom-sh
     start qcom-post-boot
-    setprop sys.io.scheduler "bfq"
+    setprop sys.io.scheduler "cfq"
     restart cameraserver
     # update cpusets now that boot is complete and we want
     # better load balancing
@@ -449,6 +455,12 @@ on property:sys.boot_completed=1
     write /sys/module/wakeup/parameters/enable_netmgr_wl_ws 0
     write /sys/module/wakeup/parameters/enable_wlan_pno_wl_ws 0
     write /sys/module/wakeup/parameters/enable_wcnss_filter_lock_ws 0
+
+    # end boot time fs tune
+    write /sys/block/mmcblk0/queue/read_ahead_kb 512
+    write /sys/block/mmcblk0/queue/nr_requests 256
+    write /sys/block/mmcblk0/queue/iostats 1 
+    write /sys/block/mmcblk1/queue/read_ahead_kb 512
 
 on property:init.svc.surfaceflinger=restarting
     stop hwcomposer-2-1

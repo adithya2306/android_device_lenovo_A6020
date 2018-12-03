@@ -146,6 +146,12 @@ on fs
     mount_all fstab.qcom
     restorecon_recursive /persist
 
+    # boot time fs tune
+    write /sys/block/mmcblk0/queue/iostats 0
+    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
+    write /sys/block/mmcblk1/queue/iostats 0
+    write /sys/block/mmcblk1/queue/read_ahead_kb 1024
+
 on post-fs-data
     # Create folder for mm-qcamera-daemon
     mkdir /data/misc/camera 0770 camera camera
@@ -198,7 +204,6 @@ on post-fs-data
 
     start vm_bms
     setprop vold.post_fs_data_done 1
-
 
 service wcnss-service /system/bin/wcnss_service
     class main
@@ -381,8 +386,12 @@ on property:sys.boot_completed=1
     start qcom-sh
     start qcom-mem-sh
     start qcom-post-boot
-    setprop sys.io.scheduler "bfq"
+    setprop sys.io.scheduler "cfq"
     restart cameraserver
+
+    # post-boot fs tune
+    write /sys/block/mmcblk0/queue/read_ahead_kb 1024
+    write /sys/block/mmcblk1/queue/read_ahead_kb 512
 
     # RPS mask
     write /sys/class/net/rmnet0/queues/rx-0/rps_cpus 10
@@ -405,8 +414,8 @@ on property:sys.boot_completed=1
     write /sys/module/wakeup/parameters/enable_wlan_pno_wl_ws 0
     write /sys/module/wakeup/parameters/enable_wcnss_filter_lock_ws 0
 
-    setprop ro.min_freq_0 400000
-    setprop ro.min_freq_4 499200
+    setprop ro.min_freq_0 200000
+    setprop ro.min_freq_4 200000
 
     # change GPU initial power level from 400Mhz(level 2) to 220MHz(level 3)
     write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 3

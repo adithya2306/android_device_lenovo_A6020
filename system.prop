@@ -161,9 +161,6 @@ persist.timed.enable=true
 persist.vendor.qti.inputopts.enable=true
 persist.vendor.qti.inputopts.movetouchslop=0.6
 
-# UI
-sys.use_fifo_ui=1
-
 # Vendor security patch level
 ro.lineage.build.vendor_security_patch=2016-10-01
 

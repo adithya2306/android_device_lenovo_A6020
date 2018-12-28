@@ -103,6 +103,8 @@ PRODUCT_COPY_FILES += \
 
 # IMS
 PRODUCT_PACKAGES += \
+    ims-ext-common \
+    ims_ext_common.xml \
     libshims_boringssl \
     libshims_ims
 
@@ -208,7 +210,7 @@ PRODUCT_PACKAGES += \
     libxml2
 
 # Telephony
-PRODUCT_PACKAGES += telephony-ext ims-ext-common
+PRODUCT_PACKAGES += telephony-ext
 PRODUCT_BOOT_JARS += telephony-ext
 
 # Thermal

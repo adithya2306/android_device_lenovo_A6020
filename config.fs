@@ -21,12 +21,12 @@ caps: 0
 
 [system/vendor/bin/imsdatadaemon]
 mode: 0755
-user: AID_SYSTEM
-group: AID_SYSTEM
+user: AID_RADIO
+group: AID_RADIO
 caps: NET_BIND_SERVICE
 
 [system/vendor/bin/ims_rtp_daemon]
 mode: 0755
-user: AID_SYSTEM
+user: AID_RADIO
 group: AID_RADIO
 caps: NET_BIND_SERVICE

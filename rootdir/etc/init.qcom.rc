@@ -201,6 +201,9 @@ on post-fs-data
     chmod 0664 /sys/class/power_supply/bms/current_now
     chmod 0664 /sys/class/power_supply/bms/voltage_ocv
 
+    # Start RIL daemon
+    start ril-daemon
+
     start vm_bms
     setprop vold.post_fs_data_done 1
 

@@ -157,6 +157,9 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USES_MKE2FS := true
 
+# Peripheral manager
+TARGET_PER_MGR_ENABLED := true
+
 # Power
 TARGET_HAS_LEGACY_POWER_STATS := true
 TARGET_HAS_NO_WLAN_STATS := true
@@ -184,12 +187,10 @@ TARGET_SYSTEM_PROP += device/lenovo/A6020/system.prop
 
 # Shims
 TARGET_LD_SHIM_LIBS := \
-    /system/lib64/libril.so|libshim_ril.so \
     /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_gui.so \
     /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_atomic.so \
     /system/lib/hw/camera.vendor.msm8916.so|libshim_atomic.so \
     /system/lib/libmmjpeg_interface.so|libshim_atomic.so \
-    /system/vendor/lib64/libril-qc-qmi-1.so|rild_socket.so \
     /system/vendor/lib/libmmcamera2_imglib_modules.so|libshim_atomic.so
 
 # Shipping API level (for CTS backward compatibility)

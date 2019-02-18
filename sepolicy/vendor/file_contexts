@@ -12,3 +12,7 @@
 
 # DT2W
 /sys/android_touch/doubletap2wake                                    u:object_r:proc_touchpanel:s0
+
+# widevine
+/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.2-service.widevine    u:object_r:hal_drm_widevine_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.drm@1\.2-service.clearkey    u:object_r:hal_drm_widevine_exec:s0

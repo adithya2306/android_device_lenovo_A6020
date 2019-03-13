@@ -87,6 +87,11 @@ drm.service.enabled=1
 ro.min.fling_velocity=160
 ro.max.fling_velocity=20000
 
+# IMS
+persist.dbg.volte_avail_ovr=0
+persist.dbg.vt_avail_ovr=0
+persist.dbg.wfc_avail_ovr=0
+
 # Media
 mm.enable.smoothstreaming=true
 mmp.enable.3g2=true

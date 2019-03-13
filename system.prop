@@ -1,6 +1,7 @@
 # system.prop for A6020
 
 # Audio
+ro.audio.flinger_standbytime_ms=300
 ro.vendor.audio.sdk.fluencetype=none
 ro.vendor.audio.sdk.ssr=false
 persist.vendor.audio.fluence.voicecall=true
@@ -84,6 +85,11 @@ drm.service.enabled=1
 ro.min.fling_velocity=160
 ro.max.fling_velocity=20000
 
+# IMS
+persist.dbg.volte_avail_ovr=0
+persist.dbg.vt_avail_ovr=0
+persist.dbg.wfc_avail_ovr=0
+
 # Media
 mm.enable.smoothstreaming=true
 mmp.enable.3g2=true
@@ -95,9 +101,6 @@ media.stagefright.less-secure=true
 # Qualcomm
 persist.data.qmi.adb_logmask=0
 ro.qualcomm.cabl=0
-
-#low audio flinger standby delay to reduce power consumption
-ro.audio.flinger_standbytime_ms=300
 
 # NITZ
 persist.rild.nitz_plmn=
@@ -144,6 +147,3 @@ ro.lineage.build.vendor_security_patch=2016-10-01
 
 # WiFi
 wifi.interface=wlan0
-
-# WiFi Calling
-persist.dbg.wfc_avail_ovr=1

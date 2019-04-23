@@ -77,6 +77,8 @@ media.aac_51_output_enabled=true
 mm.enable.qcom_parser=3407871
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
+persist.debug.wfd.enable=1
+persist.sys.wfd.virtual=1
 
 # Memory optimizations
 ro.vendor.qti.sys.fw.bservice_enable=true

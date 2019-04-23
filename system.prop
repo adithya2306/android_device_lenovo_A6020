@@ -105,6 +105,8 @@ media.aac_51_output_enabled=true
 mm.enable.qcom_parser=3407871
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
+persist.debug.wfd.enable=1
+persist.sys.wfd.virtual=1
 
 # Qualcomm
 persist.data.qmi.adb_logmask=0

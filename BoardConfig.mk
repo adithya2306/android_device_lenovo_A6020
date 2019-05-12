@@ -15,7 +15,6 @@
 # limitations under the License.
 #
 
-
 # inherit from the proprietary version
 include vendor/lenovo/A6020/BoardConfigVendor.mk
 
@@ -81,7 +80,6 @@ PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
 
 # Display
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 TARGET_CONTINUOUS_SPLASH_ENABLED := true

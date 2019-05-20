@@ -109,6 +109,7 @@ persist.dbg.vt_avail_ovr=0
 persist.dbg.wfc_avail_ovr=0
 
 # Media
+debug.stagefright.ccodec=0
 media.aac_51_output_enabled=true
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true

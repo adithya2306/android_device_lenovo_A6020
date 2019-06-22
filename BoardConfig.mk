@@ -128,13 +128,6 @@ TARGET_NO_RPC := true
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
 
-
-# Lineage hardware
-BOARD_HARDWARE_CLASS += \
-    device/lenovo/A6020/lineagehw
-
-JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|device/lenovo/A6020/lineagehw|**/*.java
-
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_A6020
 TARGET_RECOVERY_DEVICE_MODULES := libinit_A6020
@@ -190,7 +183,7 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
 
 # RIL
 TARGET_RIL_VARIANT := caf
-BOARD_PROVIDES_LIBRIL := false
+TARGET_USES_ALTERNATIVE_MANUAL_NETWORK_SELECT := true
 
 # SELinux
 include device/qcom/sepolicy-legacy/sepolicy.mk

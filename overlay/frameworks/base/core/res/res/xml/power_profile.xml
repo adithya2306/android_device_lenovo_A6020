@@ -17,22 +17,30 @@
         <value>2</value>
         <value>1</value>
     </array>
-    <array name="cpu.core_speeds">
+    <array name="cpu.clusters.cores">
+        <value>4</value>
+        <value>4</value>
+    </array>
+    <array name="cpu.core_speeds.cluster0">
         <value>400000</value>
         <value>533333</value>
         <value>800000</value>
         <value>960000</value>
+    </array>
+    <array name="cpu.core_speeds.cluster1">
         <value>1113600</value>
         <value>1344000</value>
         <value>1459200</value>
         <value>1497600</value>
     </array>
-    <item name="cpu.idle">2.8</item>
-    <array name="cpu.core_power">
+    <item name="cpu.suspend">2.8</item>
+    <array name="cpu.core_power.cluster0">
         <value>151</value>
         <value>169</value>
         <value>136.5</value>
         <value>178</value>
+    </array>
+    <array name="cpu.core_power.cluster1">
         <value>190</value>
         <value>240</value>
         <value>265</value>

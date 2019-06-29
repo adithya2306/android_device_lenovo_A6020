@@ -1,25 +1,27 @@
+#
 # system.prop for A6020
+#
 
 # Audio
-ro.vendor.audio.sdk.fluencetype=none
-ro.vendor.audio.sdk.ssr=false
+af.fast_track_multiplier=1
+audio.deep_buffer.media=true
 persist.vendor.audio.fluence.voicecall=true
 persist.vendor.audio.fluence.voicerec=true
 persist.vendor.audio.fluence.speaker=false
+ro.vendor.audio.sdk.fluencetype=none
+ro.vendor.audio.sdk.ssr=false
 ro.af.client_heap_size_kbyte=7168
-ro.config.media_vol_steps=25
-ro.config.vc_call_vol_steps=7
+ro.audio.flinger_standbytime_ms=300
 vendor.voice.path.for.pcm.voip=true
-vidc.enc.narrow.searchrange=1
-vendor.audio.tunnel.encode = false
+vendor.audio.tunnel.encode=false
+vendor.audio.dolby.ds2.enabled=true
 vendor.mediacodec.binder.size=6
 vendor.voice.playback.conc.disabled=true
 vendor.voice.record.conc.disabled=true
 vendor.voice.voip.conc.disabled=true
+vidc.enc.narrow.searchrange=1
 
 # Audio offload
-af.fast_track_multiplier=1
-audio.deep_buffer.media=true
 vendor.audio.offload.buffer.size.kb=64
 vendor.audio.offload.gapless.enabled=true
 vendor.audio_hal.period_size=192
@@ -29,7 +31,6 @@ audio.offload.pcm.24bit.enable=false
 audio.offload.video=true
 audio.offload.disable=1
 av.offload.enable=true
-vendor.audio.dolby.ds2.enabled=true
 
 # Bluetooth
 vendor.qcom.bluetooth.soc=smd
@@ -37,6 +38,19 @@ ro.bluetooth.dun=true
 ro.bluetooth.hfp.ver=1.7
 ro.bluetooth.sap=true
 ro.qualcomm.bt.hci_transport=smd
+
+# Boot
+ro.build.shutdown_timeout=0
+sys.vendor.shutdown.waittime=500
+
+# CABL
+ro.qualcomm.cabl=0
+
+# Camera
+persist.camera.cpp.duplication=false
+
+# Charger
+persist.sys.chgdisabled=0
 
 # Cloudflare DNS
 net.dns1=1.1.1.1
@@ -55,16 +69,6 @@ dhcp.eth0.dns1=1.1.1.1
 dhcp.eth0.dns2=1.0.0.1
 dhcp.wlan0.dns1=1.1.1.1
 dhcp.wlan0.dns2=1.0.0.1
-
-# Boot
-ro.build.shutdown_timeout=0
-sys.vendor.shutdown.waittime=500
-
-# Camera
-persist.camera.cpp.duplication=false
-
-# Charger
-persist.sys.chgdisabled=0
 
 # Dex2oat optimisation
 dalvik.vm.boot-dex2oat-threads=8
@@ -88,34 +92,29 @@ persist.hwc.mdpcomp.enable=true
 persist.hwc.ptor.enable=true
 ro.opengles.version=196609
 
-# DRM
-drm.service.enabled=1
-
 # Fling velocities
 ro.min.fling_velocity=160
 ro.max.fling_velocity=20000
 
 # IMS
-persist.dbg.volte_avail_ovr=0
-persist.dbg.vt_avail_ovr=0
-persist.dbg.wfc_avail_ovr=0
+persist.dbg.ims_volte_enable=0 
+persist.dbg.volte_avail_ovr=0 
+persist.dbg.vt_avail_ovr=0 
+persist.dbg.wfc_avail_ovr=0 
+persist.radio.calls.on.ims=0
 
 # Media
-mm.enable.smoothstreaming=true
-mmp.enable.3g2=true
+drm.service.enabled=1
 media.aac_51_output_enabled=true
-mm.enable.qcom_parser=3407871
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
+mm.enable.smoothstreaming=true
+mm.enable.qcom_parser=3407871
+mmp.enable.3g2=true
 persist.debug.wfd.enable=1
 persist.sys.wfd.virtual=1
-
-# Qualcomm
-persist.data.qmi.adb_logmask=0
-ro.qualcomm.cabl=0
-
-#low audio flinger standby delay to reduce power consumption
-ro.audio.flinger_standbytime_ms=300
+ro.config.media_vol_steps=25
+ro.config.vc_call_vol_steps=7
 
 # NITZ
 persist.rild.nitz_plmn=
@@ -145,18 +144,20 @@ ro.com.google.clientidbase.gmm=android-lenovo
 ro.com.google.clientidbase.ms=android-lenovo
 ro.com.google.clientidbase.yt=android-lenovo
 
-# RIL
+# Radio
 DEVICE_PROVISIONED=1
+persist.data.qmi.adb_logmask=0
 persist.data.netmgrd.qos.enable=true
 persist.data.mode=concurrent
+persist.radio.add_power_save=1 
 persist.radio.apm_sim_not_pwdn=0
-persist.vendor.radio.rat_on=combine
+persist.radio.data_ltd_sys_ind=0 
+persist.radio.data_con_rprt=0
 rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
 ril.subscription.types=NV,RUIM
 ro.telephony.call_ring.multiple=false
-telephony.lteOnCdmaDevice=0
-persist.radio.add_power_save=1 
+telephony.lteOnCdmaDevice=1
 
 # Sensors
 persist.vendor.sensor.hw.binder.size=8
@@ -176,6 +177,3 @@ ro.lineage.build.vendor_security_patch=2016-10-01
 
 # WiFi
 wifi.interface=wlan0
-
-# WiFi Calling
-persist.dbg.wfc_avail_ovr=1

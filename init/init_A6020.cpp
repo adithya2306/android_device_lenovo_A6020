@@ -156,7 +156,7 @@ void gsm_properties(bool msim)
 
 void set_model_config(bool plus){
     if (plus){
-        property_set("ro.sf.lcd_density", "480");
+        property_set("ro.sf.lcd_density", "460");
         property_override_dual("ro.product.model", "ro.vendor.product.model", "Vibe K5 Plus");
         property_override_dual("ro.product.name", "ro.vendor.product.name", "Vibe K5 Plus");
 
@@ -175,7 +175,7 @@ void set_model_config(bool plus){
         property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "25");
 
     } else {
-        property_set("ro.sf.lcd_density", "320");
+        property_set("ro.sf.lcd_density", "300");
         property_override_dual("ro.product.model", "ro.vendor.product.model", "Vibe K5");
         property_override_dual("ro.product.name", "ro.vendor.product.name", "Vibe K5");
 

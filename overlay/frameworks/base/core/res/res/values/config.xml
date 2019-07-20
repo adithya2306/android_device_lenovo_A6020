@@ -325,7 +325,7 @@
 	<item>XTRA_SERVER_3=https://xtrapath3.izatcloud.net/xtra3grc.bin</item>
 	<item>XTRA_VERSION_CHECK=1</item>
 	<item>ERR_ESTIMATE=0</item>
-	<item>NTP_SERVER=time.izatcloud.net</item>
+	<item>NTP_SERVER=1.android.pool.ntp.org</item>
 	<item>XTRA_CA_PATH=/system/etc/security/cacerts</item>
 	<item>CAPABILITIES=0x37</item>
 	<item>DEBUG_LEVEL=2</item>

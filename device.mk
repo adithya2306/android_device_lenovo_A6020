@@ -34,6 +34,10 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 # Charger images
 PRODUCT_PACKAGES += charger_res_images
 
+# Dirac
+PRODUCT_PACKAGES += \
+    Dirac
+
 # Display
 PRODUCT_PACKAGES += \
     gralloc.msm8916 \

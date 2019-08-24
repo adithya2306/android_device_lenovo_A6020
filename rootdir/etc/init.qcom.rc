@@ -349,12 +349,10 @@ service ril-daemon2 /vendor/bin/hw/rild -c 2
     user radio
     group radio cache inet misc audio log readproc wakelock
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
- 
-multisim=`getprop persist.radio.multisim.config`
+    disabled
 
-if [ "$multisim" = "dsds" ] || [ "$multisim" = "dsda" ]; then
-    start ril-daemon2
-fi
+on property:persist.radio.multisim.config=dsds
+    enable ril-daemon2
 
 on charger
     wait /dev/block/bootdevice/by-name/system

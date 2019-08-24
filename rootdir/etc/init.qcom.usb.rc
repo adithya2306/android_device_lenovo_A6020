@@ -38,41 +38,40 @@ on boot
 
 on charger
     setprop sys.usb.config mass_storage
-    write /sys/module/lpm_levels/enable_low_power/l2 4 	35
-    write /sys/module/lpm_levels/enable_low_power/l2 4	36
-    write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1 	37
-    write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1 	38
-    write /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled 1	39
-    write /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled 1	40
-    write /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled 1	41
-    write /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled 1	42
-    write /sys/module/msm_pm/modes/cpu3/power_collapse/suspend_enabled 1 	43
-    write /sys/module/msm_pm/modes/cpu3/power_collapse/suspend_enabled 1 	44
-    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/suspend_enabled 1	45
-    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/suspend_enabled 1	46
-    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/suspend_enabled 1	47
-    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/suspend_enabled 1	48
-    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/suspend_enabled 1	49
-    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/suspend_enabled 1 	50
-    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/suspend_enabled 1	51
-    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/suspend_enabled 1	52
-    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/idle_enabled 1	53
-    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/idle_enabled 1 	54
-    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/idle_enabled 1	55
-    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/idle_enabled 1 	56
-    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/idle_enabled 1	57
-    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/idle_enabled 1	58
-    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/idle_enabled 1 	59
-    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/idle_enabled 1	60
-    write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1 	61
-    write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1	62
-    write /sys/module/msm_pm/modes/cpu1/power_collapse/idle_enabled 1	63
-    write /sys/module/msm_pm/modes/cpu1/power_collapse/idle_enabled 1	64
-    write /sys/module/msm_pm/modes/cpu2/power_collapse/idle_enabled 1	65
-    write /sys/module/msm_pm/modes/cpu2/power_collapse/idle_enabled 1	66
-    write /sys/module/msm_pm/modes/cpu3/power_collapse/idle_enabled 1	67
-    write /sys/module/msm_pm/modes/cpu3/power_collapse/idle_enabled 1	68
-
+    write /sys/module/lpm_levels/enable_low_power/l2 4
+    write /sys/module/lpm_levels/enable_low_power/l2 4
+    write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/power_collapse/idle_enabled 1
 
 on fs
     mkdir /dev/usb-ffs 0770 shell shell

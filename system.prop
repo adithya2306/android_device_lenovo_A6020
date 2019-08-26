@@ -5,16 +5,17 @@
 # Audio
 af.fast_track_multiplier=1
 audio.deep_buffer.media=true
+persist.vendor.audio.fluence.audiorec=false
 persist.vendor.audio.fluence.speaker=false
 persist.vendor.audio.fluence.voicecall=true
 persist.vendor.audio.fluence.voicerec=true
 ro.audio.flinger_standbytime_ms=300
 ro.config.media_vol_steps=25
 ro.config.vc_call_vol_steps=7
-ro.vendor.audio.sdk.fluencetype=none
+ro.vendor.audio.sdk.fluencetype=fluence
 ro.vendor.audio.sdk.ssr=false
 vendor.audio.dolby.ds2.enabled=true
-vendor.audio.tunnel.encode = false
+vendor.audio.tunnel.encode=false
 vendor.voice.path.for.pcm.voip=true
 vendor.voice.playback.conc.disabled=true
 vendor.voice.record.conc.disabled=true

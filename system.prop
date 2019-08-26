@@ -1,14 +1,15 @@
 # system.prop for A6020
 
 # Audio
-ro.vendor.audio.sdk.fluencetype=none
+ro.vendor.audio.sdk.fluencetype=fluence
 ro.vendor.audio.sdk.ssr=false
 persist.vendor.audio.fluence.voicecall=true
 persist.vendor.audio.fluence.voicerec=true
+persist.vendor.audio.fluence.audiorec=false
 persist.vendor.audio.fluence.speaker=false
 vendor.voice.path.for.pcm.voip=true
 vidc.enc.narrow.searchrange=1
-vendor.audio.tunnel.encode = false
+vendor.audio.tunnel.encode=false
 vendor.voice.playback.conc.disabled=true
 vendor.voice.record.conc.disabled=true
 vendor.voice.voip.conc.disabled=true

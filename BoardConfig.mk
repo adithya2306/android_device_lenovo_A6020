@@ -23,6 +23,13 @@ LOCAL_PATH := device/lenovo/A6020
 # Platform
 TARGET_BOARD_PLATFORM := msm8916
 BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_ADRENO := true
+TARGET_USES_QCOM_BSP := true
+TARGET_COMPILE_WITH_MSM_KERNEL := true
+TARGET_USES_MEDIA_EXTENSIONS := true
+TARGET_USES_QCOM_MM_AUDIO := true
+MSM_VIDC_TARGET_LIST := msm8916
+QCOM_HARDWARE_VARIANT := msm8916
 
 # Architecture
 TARGET_ARCH := arm64
@@ -46,7 +53,9 @@ AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 BOARD_USES_ALSA_AUDIO := true
-USE_CUSTOM_AUDIO_POLICY := 1
+
+### DNM ###
+#USE_CUSTOM_AUDIO_POLICY := 1
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
@@ -84,15 +93,6 @@ WITH_DEXPREOPT := true
 WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
 endif
 endif
-
-# Dex optimization
-PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
-PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
-PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE := true
-PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := frameworks/base/config/boot-image-profile.txt
-PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
-PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
-PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
 
 # Display
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
@@ -180,7 +180,7 @@ TARGET_USES_ALTERNATIVE_MANUAL_NETWORK_SELECT := true
 TARGET_USES_OLD_MNC_FORMAT := true
 
 # SELinux
-include device/qcom/sepolicy-legacy/sepolicy.mk
+#include device/qcom/sepolicy-legacy/sepolicy.mk
 #BOARD_SEPOLICY_DIRS += device/lenovo/A6020/sepolicy
 
 # System properties
@@ -193,9 +193,6 @@ TARGET_LD_SHIM_LIBS := \
     /system/lib/hw/camera.vendor.msm8916.so|libshim_atomic.so \
     /system/lib/libmmjpeg_interface.so|libshim_atomic.so \
     /system/vendor/lib/libmmcamera2_imglib_modules.so|libshim_atomic.so
-
-# Shipping API level (for CTS backward compatibility)
-PRODUCT_SHIPPING_API_LEVEL := 22
 
 # Vendor security patch level
 VENDOR_SECURITY_PATCH := 2016-10-01

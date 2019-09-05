@@ -34,6 +34,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
+# Dex
+PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
+PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
+PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE := true
+PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := frameworks/base/config/boot-image-profile.txt
+
 # Display
 PRODUCT_PACKAGES += \
     gralloc.msm8916 \
@@ -160,7 +166,7 @@ PRODUCT_PACKAGES += \
     libbson \
     libshim_gui \
     libshim_atomic \
-    Snap\
+    Camera2
 
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/configs/external_camera_config.xml:system/etc/external_camera_config.xml

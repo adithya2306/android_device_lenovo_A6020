@@ -23,6 +23,9 @@ LOCAL_PATH := device/lenovo/A6020
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_PHONY_TARGETS := true
+
 # Audio
 AUDIO_FEATURE_DEEP_BUFFER_RINGTONE := true
 AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
@@ -69,12 +72,6 @@ WITH_DEXPREOPT := true
 WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
 endif
 endif
-
-# Optimize
-PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
-PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
-PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE := true
-PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := frameworks/base/config/boot-image-profile.txt
 
 # Display
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
@@ -197,7 +194,7 @@ TARGET_RIL_VARIANT := caf
 BOARD_PROVIDES_LIBRIL := false
 
 # SELinux
-include device/qcom/sepolicy-legacy/sepolicy.mk
+#include device/qcom/sepolicy-legacy/sepolicy.mk
 
 #BOARD_SEPOLICY_DIRS += \
 #    device/lenovo/A6020/sepolicy

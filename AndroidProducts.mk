@@ -15,5 +15,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_A6020.mk \
     $(LOCAL_DIR)/lineage_A6020.mk
+
+COMMON_LUNCH_CHOICES := \
+    lineage_A6020-userdebug \
+    lineage_A6020-eng \
+    lineage_A6020-user

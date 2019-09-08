@@ -1,0 +1,14 @@
+cc_library_static {
+    name: "libinit_A6020",
+    recovery_available: true,
+
+    include_dirs: ["system/core/init"],
+    cpp_std: "c++17",
+    cppflags: [
+        "-Wall",
+        "-DANDROID_TARGET=\"msm8916\"",
+    ],
+
+    srcs: ["init_A6020.cpp"],
+    static_libs: ["libbase"],
+}

@@ -249,5 +249,3 @@ case "$target" in
 
     ;;
 esac
-
-

@@ -188,6 +188,7 @@ TARGET_USES_OLD_MNC_FORMAT := true
 # SELinux
 #include device/qcom/sepolicy-legacy/sepolicy.mk
 #BOARD_SEPOLICY_DIRS += device/lenovo/A6020/sepolicy
+BOARD_SEPOLICY_DIRS += device/lenovo/A6020/sepolicy_tmp
 
 # System properties
 TARGET_SYSTEM_PROP += device/lenovo/A6020/system.prop

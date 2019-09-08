@@ -305,7 +305,7 @@ service tftp_server /system/vendor/bin/tftp_server
    class main
    user root
 
-service hciattach /system/vendor/bin/sh /system/etc/init.qcom.bt.sh
+service hciattach /system/vendor/bin/init.qcom.bt.sh
     class late_start
     user bluetooth
     group bluetooth net_bt_admin
@@ -403,12 +403,12 @@ service per_mgr /system/vendor/bin/pm-service
     user system
     group system net_raw
 
-service qcom-sh /system/vendor/bin/sh /system/etc/init.qcom.sh
+service qcom-sh /system/vendor/bin/init.qcom.sh
     class late_start
     user root
     oneshot
 
-service qcom-post-boot /system/vendor/bin/sh /system/etc/init.qcom.post_boot.sh
+service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     class late_start
     user root
     disabled
@@ -457,6 +457,6 @@ on property:init.svc.surfaceflinger=restarting
     stop hwcomposer-2-1
     start hwcomposer-2-1
 
-service qcom-mem /system/vendor/bin/sh /system/etc/init.qcom.mem.sh
+service qcom-mem /system/vendor/bin/init.qcom.mem.sh
     disabled
     oneshot

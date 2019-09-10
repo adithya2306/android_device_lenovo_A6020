@@ -27,16 +27,15 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdlib.h>
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include <android-base/properties.h>
 #include "property_service.h"
 #include "vendor_init.h"
 
-using android::base::GetProperty;
 using android::init::property_set;
 
 #define ISMATCH(a,b)    (!strncmp(a,b,PROP_VALUE_MAX))
@@ -71,11 +70,6 @@ void vendor_load_properties()
     char board_id[32];
     char panel_id[32];
     FILE *fp;
-    platform = GetProperty("ro.board.platform", "");
-
-    if (platform != ANDROID_TARGET) {
-        return;
-    }
 
     if ((fp = fopen("/proc/cmdline", "r")) == NULL) {
         printf("Failed to open /proc/cmdline");
@@ -193,4 +187,3 @@ void set_model_config(bool plus){
 
     }
 }
-

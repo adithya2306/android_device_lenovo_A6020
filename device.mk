@@ -34,6 +34,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
+# Charger images
+PRODUCT_PACKAGES += charger_res_images
+
 # Display
 PRODUCT_PACKAGES += \
     gralloc.msm8916 \

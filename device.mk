@@ -84,6 +84,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/external_camera_config.xml:system/etc/external_camera_config.xml
 
+# Charger images
+PRODUCT_PACKAGES += charger_res_images
+
 # Dex optimization
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true

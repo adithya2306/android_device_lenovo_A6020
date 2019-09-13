@@ -258,6 +258,15 @@ on post-fs-data
     start vm_bms
     setprop vold.post_fs_data_done 1
 
+on property:persist.env.fastdorm.enabled=true
+    setprop persist.radio.data_no_toggle 1
+
+service cnd /system/vendor/bin/cnd
+    class main
+    user system
+    group system wifi inet radio wakelock net_admin
+    writepid /dev/cpuset/system-background/tasks
+
 service wcnss-service /system/bin/wcnss_service
     class late_start
     user system

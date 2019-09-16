@@ -103,10 +103,13 @@ PRODUCT_COPY_FILES += \
 
 # IMS
 PRODUCT_PACKAGES += \
-    ims-ext-common \
+    ims-ext-common_system \
     ims_ext_common.xml \
     libshims_boringssl \
     libshims_ims
+
+PRODUCT_BOOT_JARS += \
+    ims-ext-common_system
 
 # IRSC
 PRODUCT_COPY_FILES += \

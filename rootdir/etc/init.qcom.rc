@@ -341,6 +341,7 @@ service charger /sbin/poweroffcharge
     class charger
     user root
     group root system graphics input
+    capabilities SYS_BOOT
 
 service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
     class core

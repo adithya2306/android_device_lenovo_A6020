@@ -27,8 +27,9 @@ PRODUCT_PACKAGES += \
     libbt-hci \
     libbt-vendor
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
@@ -99,11 +100,14 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml 
 
-
 # IMS
 PRODUCT_PACKAGES += \
     libshims_boringssl \
     libshims_ims
+
+# IRSC
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
 
 # Keylayout
 PRODUCT_COPY_FILES += \

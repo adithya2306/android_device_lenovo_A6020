@@ -134,6 +134,9 @@ void vendor_load_properties()
         set_model_config(false);
         gsm_properties(true);
     }
+
+    // Init a dummy BT MAC address, will be overwritten later
+    property_set("ro.boot.btmacaddr", "00:00:00:00:00:00");
 }
 
 void gsm_properties(bool msim)

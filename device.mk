@@ -175,11 +175,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     librmnetctl \
-    libshim_ril \
-    libxml2 \
-    libril \
-    rild_socket \
-    ril-wrapper
+    libxml2
 
 # Thermal
 PRODUCT_COPY_FILES += \

@@ -196,20 +196,6 @@ on post-fs-data
     chmod 0664 /sys/class/power_supply/bms/current_now
     chmod 0664 /sys/class/power_supply/bms/voltage_ocv
 
-    mkdir /data/misc/ipa 0700 net_admin net_admin
-
-    # Create the directories used by CnE subsystem
-    mkdir /data/connectivity 0771 system system
-    chown system system /data/connectivity
-
-    # Create the directories used by DPM subsystem
-    mkdir /data/dpm 0771 system system
-    chown system system /data/dpm
-
-    mkdir /data/dpm/nsrm 0771 system system
-    chown system system /data/dpm/nsrm
-
-    # Start BMS service
     start vm_bms
     setprop vold.post_fs_data_done 1
 
@@ -293,10 +279,6 @@ service rmt_storage /system/vendor/bin/rmt_storage
     group system wakelock
     writepid /dev/cpuset/system-background/tasks
     shutdown critical
-
-service tftp_server /system/vendor/bin/tftp_server
-   class main
-   user root
 
 service hciattach /system/vendor/bin/init.qcom.bt.sh
     class late_start
@@ -391,11 +373,6 @@ service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/m
     group root
     disabled
     writepid /dev/cpuset/system-background/tasks
-
-service per_mgr /system/vendor/bin/pm-service
-    class core
-    user system
-    group system net_raw
 
 service qcom-sh /system/vendor/bin/init.qcom.sh
     class late_start

@@ -14,7 +14,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-# Camera
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := lenovo_gui.c
 LOCAL_SHARED_LIBRARIES := liblog libcutils libsensor libbinder libutils

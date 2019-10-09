@@ -56,6 +56,11 @@ ro.opengles.version=196609
 # DRM
 drm.service.enabled=1
 
+# IMS
+persist.dbg.volte_avail_ovr=1
+persist.dbg.vt_avail_ovr=0
+persist.dbg.wfc_avail_ovr=0
+
 # Media
 mm.enable.smoothstreaming=true
 mmp.enable.3g2=true
@@ -91,18 +96,18 @@ ro.com.google.clientidbase.gmm=android-lenovo
 ro.com.google.clientidbase.ms=android-lenovo
 ro.com.google.clientidbase.yt=android-lenovo
 
-# RIL
+# Radio
 DEVICE_PROVISIONED=1
-persist.data.netmgrd.qos.enable=true
 persist.data.mode=concurrent
+persist.data.netmgrd.qos.enable=true
+persist.data.qmi.adb_logmask=0
+persist.radio.add_power_save=1
 persist.radio.apm_sim_not_pwdn=0
-persist.vendor.radio.rat_on=combine
-rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
-rild.libargs=-d /dev/smd0
 ril.subscription.types=NV,RUIM
+rild.libargs=-d /dev/smd0
+rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 ro.telephony.call_ring.multiple=false
 telephony.lteOnCdmaDevice=0
-persist.radio.add_power_save=1 
 
 # Time
 persist.timed.enable=true

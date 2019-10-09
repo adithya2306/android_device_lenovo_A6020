@@ -366,9 +366,50 @@ service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/m
     disabled
     writepid /dev/cpuset/system-background/tasks
 
+service imsqmidaemon /system/vendor/bin/imsqmidaemon
+    class main
+    user system
+    socket ims_qmid stream 0660 system radio
+    group radio net_raw log diag oem_2950
+    writepid /dev/cpuset/system-background/tasks
+
+service imsdatadaemon /system/vendor/bin/imsdatadaemon
+    class main
+    user system
+    socket ims_datad stream 0660 system radio
+    group system wifi radio inet net_raw log diag net_admin oem_2950
+    writepid /dev/cpuset/system-background/tasks
+    disabled
+
+on property:sys.ims.QMI_DAEMON_STATUS=1
+    start imsdatadaemon
+
+service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
+   class main
+   user system
+   socket ims_rtpd stream 0660 system radio
+   group radio net_raw diag  log oem_2950
+   writepid /dev/cpuset/system-background/tasks
+   disabled
+
+service imscmservice /system/vendor/bin/imscmservice
+   class main
+   user system
+   group radio net_raw diag log oem_2950
+   writepid /dev/cpuset/system-background/tasks
+   disabled
+
+on property:sys.ims.DATA_DAEMON_STATUS=1
+    start ims_rtp_daemon
+    start imscmservice
+
 service qcom-sh /system/vendor/bin/sh /system/etc/init.qcom.sh
     class late_start
     user root
+    oneshot
+
+service qcom-mem /system/vendor/bin/sh /system/etc/init.qcom.mem.sh
+    disabled
     oneshot
 
 service qcom-post-boot /system/vendor/bin/sh /system/etc/init.qcom.post_boot.sh
@@ -394,7 +435,3 @@ on property:sys.boot_completed=1
 on property:init.svc.surfaceflinger=restarting
     stop hwcomposer-2-1
     start hwcomposer-2-1
-
-service qcom-mem /system/vendor/bin/sh /system/etc/init.qcom.mem.sh
-    disabled
-    oneshot

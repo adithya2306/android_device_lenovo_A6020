@@ -118,7 +118,7 @@ on boot
     chown system graphics /sys/class/graphics/fb0/srgb
     chmod 0664 /sys/class/graphics/fb0/srgb
 
-    #LED permissions
+    # LED permissions
     chown system system /sys/class/leds/red/blink
     chown system system /sys/class/leds/red/led_time
     chown system system /sys/class/leds/red/brightness
@@ -140,6 +140,7 @@ on late-fs
     write /sys/block/mmcblk0/queue/iostats 0
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
     write /sys/block/mmcblk0/queue/nr_requests 256
+    write /sys/block/mmcblk1/queue/iostats 0
     write /sys/block/mmcblk1/queue/read_ahead_kb 1024
 
 on post-fs
@@ -170,12 +171,6 @@ on post-fs-data
     # Create /data/time folder for time-services
     mkdir /data/time 0700 system system
 
-    # Tombstones
-    mkdir /data/tombstones/modem 0771 system system
-    mkdir /data/tombstones/lpass 0771 system system
-    mkdir /data/tombstones/wcnss 0771 system system
-    mkdir /data/tombstones/dsps 0771 system system
-
     # Bluetooth
     chown bluetooth bluetooth /persist/.bt_nv.bin
 
@@ -204,35 +199,6 @@ service wcnss-service /system/bin/wcnss_service
     user system
     group system wifi radio
     oneshot
-
-on enable-low-power
-    start qcom-mem
-
-    write /proc/sys/kernel/sched_boost 1
-
-    # RPS mask
-    write /sys/class/net/rmnet0/queues/rx-0/rps_cpus 10
-
-    # add a cpuset for the camera daemon
-    # we want all the little cores for camera
-    mkdir /dev/cpuset/camera-daemon
-    chown system system /dev/cpuset/camera-daemon
-    chown system system /dev/cpuset/camera-daemon/tasks
-    chmod 0664 /dev/cpuset/camera-daemon/tasks
-
-    # Configure foreground and background cpusets
-    # Reserve CPU 7 for the top app
-    write /dev/cpuset/foreground/cpus 0-6
-    write /dev/cpuset/background/cpus 4-6
-    write /dev/cpuset/system-background/cpus 4-6
-    write /dev/cpuset/top-app/cpus 0-7
-    write /dev/cpuset/camera-daemon/cpus 4-7
-
-    setprop ro.min_freq_0 200000
-    setprop ro.min_freq_4 800000
-
-    # change GPU initial power level from 400Mhz(level 2) to 220MHz(level 3)
-    write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 3
 
 #start camera server as daemon
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
@@ -342,6 +308,17 @@ service ril-daemon2 /vendor/bin/hw/rild -c 2
 on property:persist.radio.multisim.config=dsds
     enable ril-daemon2
 
+service vm_bms /system/vendor/bin/vm_bms
+    class main
+    user root
+    group root wakelock
+
+service charger /system/bin/charger
+    class charger
+    user system
+    group system graphics input
+    critical
+
 on charger
     wait /dev/block/bootdevice/by-name/system
     mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
@@ -356,18 +333,9 @@ on charger
     chmod 0664 /sys/class/power_supply/bms/voltage_ocv
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
-    start vm_bms
-    
-service vm_bms /system/vendor/bin/vm_bms
-    class main
-    user root
-    group root wakelock
 
-service charger /system/bin/charger
-    class charger
-    user system
-    group system graphics input
-    critical
+    load_system_props
+    start vm_bms
 
 service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
     class core
@@ -428,13 +396,26 @@ service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     disabled
     oneshot
 
+on property:init.svc.surfaceflinger=restarting
+    stop hwcomposer-2-1
+    start hwcomposer-2-1
+
 on property:sys.boot_completed=1
     start qcom-sh
+    start qcom-mem
     start qcom-post-boot
-    setprop sys.io.scheduler "cfq"
-    restart cameraserver
-    # update cpusets now that boot is complete and we want
-    # better load balancing
+
+    setprop sys.io.scheduler cfq
+
+    # add a cpuset for the camera daemon
+    # we want all the little cores for camera
+    mkdir /dev/cpuset/camera-daemon
+    chown system system /dev/cpuset/camera-daemon
+    chown system system /dev/cpuset/camera-daemon/tasks
+    chmod 0664 /dev/cpuset/camera-daemon/tasks
+
+    # Configure foreground and background cpusets
+    # Reserve CPU 7 for the top app
     write /dev/cpuset/foreground/cpus 0-6
     write /dev/cpuset/background/cpus 4-6
     write /dev/cpuset/system-background/cpus 4-6
@@ -442,10 +423,10 @@ on property:sys.boot_completed=1
     write /dev/cpuset/camera-daemon/cpus 4-7
     write /dev/cpuset/restricted/cpus 4-7
 
-    # Enable KSM
-    write /sys/kernel/mm/ksm/pages_to_scan 100
-    write /sys/kernel/mm/ksm/sleep_millisecs 500
-    write /sys/kernel/mm/ksm/run 1
+    setprop ro.min_freq_0 200000
+    setprop ro.min_freq_4 499200
+
+    restart cameraserver
 
     # Disable some wakelocks
     write /sys/module/wakeup/parameters/enable_qcom_rx_wakelock_ws 0
@@ -461,13 +442,6 @@ on property:sys.boot_completed=1
     # end boot time fs tune
     write /sys/block/mmcblk0/queue/read_ahead_kb 512
     write /sys/block/mmcblk1/queue/read_ahead_kb 256
-
-    # Disable sleep_disabled in LPM
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
-
-on property:init.svc.surfaceflinger=restarting
-    stop hwcomposer-2-1
-    start hwcomposer-2-1
 
 on property:apexd.status=ready
     mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind

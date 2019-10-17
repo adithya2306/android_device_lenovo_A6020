@@ -27,9 +27,6 @@ PRODUCT_PACKAGES += \
     libbt-hci \
     libbt-vendor
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
-
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
@@ -93,11 +90,18 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml 
 
-
 # IMS
 PRODUCT_PACKAGES += \
+    ims-ext-common \
     libshims_boringssl \
     libshims_ims
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
+
+# IRSC
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
 
 # Keylayout
 PRODUCT_COPY_FILES += \
@@ -106,7 +110,6 @@ PRODUCT_COPY_FILES += \
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8916
-
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
@@ -197,7 +200,7 @@ PRODUCT_PACKAGES += \
     libxml2
 
 # Telephony
-PRODUCT_PACKAGES += telephony-ext ims-ext-common
+PRODUCT_PACKAGES += telephony-ext
 PRODUCT_BOOT_JARS += telephony-ext
 
 # Thermal
@@ -241,7 +244,6 @@ PRODUCT_PACKAGES += \
     init.qcom.mem.sh \
     init.qcom.post_boot.sh \
     ueventd.qcom.rc
-
 
 # Seccomp
 PRODUCT_COPY_FILES += \

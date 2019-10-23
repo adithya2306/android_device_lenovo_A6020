@@ -99,6 +99,7 @@ if [ `cat /sys/devices/soc0/revision` != "3.0" ]; then
     echo 50000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
     echo 50000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/sampling_down_factor
     echo 200000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    echo 1113600 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
     echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/powersave_bias
 
     # enable governor for power cluster
@@ -113,6 +114,7 @@ if [ `cat /sys/devices/soc0/revision` != "3.0" ]; then
     echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
     echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor
     echo 200000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+    echo 800000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
     echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/powersave_bias
 else
     # Apply 3.0 specific Sched & Governor settings
@@ -136,6 +138,7 @@ else
     echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
     echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/sampling_down_factor
     echo 200000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    echo 1344000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
     echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/powersave_bias
 
     # enable governor for power cluster
@@ -150,6 +153,7 @@ else
     echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
     echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor
     echo 200000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+    echo 998400 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
     echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/powersave_bias
 
     # enable sched guided freq control

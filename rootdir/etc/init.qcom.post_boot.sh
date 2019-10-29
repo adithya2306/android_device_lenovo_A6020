@@ -95,7 +95,7 @@ if [ `cat /sys/devices/soc0/revision` != "3.0" ]; then
     echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
     echo 998400 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
     echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-    echo "1 400000:35 800000:65 960000:85 1113600:95" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+    echo "49 400000:50 800000:65 960000:85 1113600:95" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
     echo 50000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
     echo 50000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/sampling_down_factor
     echo 200000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
@@ -110,7 +110,7 @@ if [ `cat /sys/devices/soc0/revision` != "3.0" ]; then
     echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
     echo 800000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
     echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
-    echo "1 800000:90" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
+    echo "39 499200:50 533330:70 800000:90" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
     echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
     echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor
     echo 200000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
@@ -134,7 +134,7 @@ else
     echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
     echo 998400 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
     echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-    echo "1 400000:30 800000:60 960000:85 1113600:90 1344000:95" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+    echo "39 400000:40 800000:60 960000:85 1113600:90 1344000:95" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
     echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
     echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/sampling_down_factor
     echo 200000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
@@ -149,7 +149,7 @@ else
     echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
     echo 800000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
     echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
-    echo "1 800000:90" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
+    echo "34 499200:35 533330:60 800000:85 998400:90" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
     echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
     echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/sampling_down_factor
     echo 200000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
@@ -192,3 +192,4 @@ echo 20 > /sys/devices/system/cpu/cpu4/core_ctl/busy_up_thres
 echo 5 > /sys/devices/system/cpu/cpu4/core_ctl/busy_down_thres
 echo 5000 > /sys/devices/system/cpu/cpu4/core_ctl/offline_delay_ms
 echo 1 > /sys/devices/system/cpu/cpu4/core_ctl/not_preferred
+

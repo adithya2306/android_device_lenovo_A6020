@@ -128,7 +128,9 @@ USE_DEVICE_SPECIFIC_GPS := true
 TARGET_NO_RPC := true
 
 # HIDL
+DEVICE_FRAMEWORK_MANIFEST_FILE := $(LOCAL_PATH)/framework_manifest.xml
 DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml
+DEVICE_MATRIX_FILE   := $(LOCAL_PATH)/compatibility_matrix.xml
 
 # HWUI
 HWUI_COMPILE_FOR_PERF := true
@@ -166,6 +168,9 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USES_MKE2FS := true
 
+# Peripheral manager
+TARGET_PER_MGR_ENABLED := true
+
 # Power
 TARGET_POWERHAL_SET_INTERACTIVE_EXT := $(LOCAL_PATH)/power/power_ext.c
 
@@ -178,8 +183,9 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
 
 # RIL
 MALLOC_SVELTE := true
+PROTOBUF_SUPPORTED := true
+TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 TARGET_RIL_VARIANT := caf
-TARGET_USES_ALTERNATIVE_MANUAL_NETWORK_SELECT := true
 TARGET_USES_OLD_MNC_FORMAT := true
 
 # SELinux
@@ -194,11 +200,10 @@ TARGET_SYSTEM_PROP += device/lenovo/A6020/system.prop
 TARGET_LD_SHIM_LIBS := \
     /system/lib/hw/camera.vendor.msm8916.so|libshim_atomic.so \
     /system/lib/libmmjpeg_interface.so|libshim_atomic.so \
+    /system/lib64/lib-imsvideocodec.so|libshim_ims.so \
     /system/vendor/lib/libmmcamera2_imglib_modules.so|libshim_atomic.so \
     /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_gui.so \
-    /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_atomic.so \
-    /system/vendor/lib64/lib-imsdpl.so|libshims_boringssl.so \
-    /system/vendor/lib64/lib-imsvt.so|libshims_ims.so
+    /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_atomic.so
 
 # Vendor security patch level
 VENDOR_SECURITY_PATCH := 2016-10-01

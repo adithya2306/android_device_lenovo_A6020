@@ -176,8 +176,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     ims-ext-common_system \
     ims_ext_common.xml \
-    libshims_boringssl \
-    libshims_ims
+    libshim_ims
 
 PRODUCT_BOOT_JARS += \
     ims-ext-common_system
@@ -219,12 +218,22 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libOmxVidcCommon \
+	libqdMetaData.system \
     libstagefrighthw
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
     $(LOCAL_PATH)/configs/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
+
+# Netutils
+PRODUCT_PACKAGES += \
+    netutils-wrapper-1.0 \
+    android.system.net.netd@1.0
+
+PRODUCT_PACKAGES += \
+    libandroid_net \
+    libandroid_net_32
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -267,10 +276,19 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.power@1.2-service-qti
 
+# RCS
+PRODUCT_PACKAGES += \
+    com.android.ims.rcsmanager \
+    rcs_service_aidl \
+    rcs_service_aidl.xml \
+    rcs_service_api \
+    rcs_service_api.xml
+
 # RIL
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     librmnetctl \
+	libtinyxml \
     libxml2
 
 # Ramdisk
@@ -284,14 +302,12 @@ PRODUCT_PACKAGES += \
     init.qcom.post_boot.sh \
     ueventd.qcom.rc
 
-# AOSP filesystems
+# RCS
 PRODUCT_PACKAGES += \
-    fsck.exfat \
-    fsck.ntfs \
-    mke2fs \
-    mkfs.exfat \
-    mkfs.ntfs \
-    mount.ntfs
+    rcs_service_aidl \
+    rcs_service_aidl.xml \
+    rcs_service_api \
+    rcs_service_api.xml
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal

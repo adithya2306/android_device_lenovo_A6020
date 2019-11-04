@@ -104,8 +104,20 @@ ro.max.fling_velocity=20000
 
 # IMS
 persist.dbg.volte_avail_ovr=1
-persist.dbg.vt_avail_ovr=0
-persist.dbg.wfc_avail_ovr=0
+persist.dbg.vt_avail_ovr=1
+persist.radio.calls.on.ims=1
+persist.radio.csvt.enabled=false
+persist.radio.ROTATION_ENABLE=1
+persist.radio.VT_ENABLE=1
+persist.radio.VT_HYBRID_ENABLE=1
+persist.radio.VT_USE_MDM_TIME=0
+persist.vendor.ims.disableADBLogs=0
+persist.vendor.ims.disableDebugDataPathLogs=0
+persist.vendor.ims.disableDebugLogs=0
+persist.vendor.ims.disableIMSLogs=0
+persist.vendor.ims.dropset_feature=0
+persist.vendor.ims.vt.enableadb=1
+persist.vendor.qti.telephony.vt_cam_interface=1
 
 # Media
 debug.stagefright.ccodec=0
@@ -151,22 +163,41 @@ ro.com.google.clientidbase.yt=android-lenovo
 
 # Radio
 DEVICE_PROVISIONED=1
+net.tcp.2g_init_rwnd=10
+persist.data.iwlan.enable=true
 persist.data.mode=concurrent
 persist.data.netmgrd.qos.enable=true
 persist.data.qmi.adb_logmask=0
-persist.radio.add_power_save=1
-persist.radio.data_con_rprt=1
-persist.radio.data_ltd_sys_ind=1
-persist.radio.mt_sms_ack=20
-persist.radio.no_cons_man_roam=1
-persist.radio.rat_on=combine
-persist.radio.sib16_support=1
-persist.radio.apm_sim_not_pwdn=0
+persist.radio.aosp_usr_pref_sel=true
+persist.radio.schd.cache=3500
+persist.radio.videopause.mode=1
+persist.vendor.radio.adb_log_on=1
+persist.vendor.radio.add_power_save=1
+persist.vendor.radio.cs_srv_type=1
+persist.vendor.radio.custom_ecc=1
+persist.vendor.radio.data_con_rprt=1
+persist.vendor.radio.data_ltd_sys_ind=1
+persist.vendor.radio.force_on_dc=true
+persist.vendor.radio.hw_mbn_update=0
+persist.vendor.radio.lte_vrte_ltd=1
+persist.vendor.radio.no_cons_man_roam=1
+persist.vendor.radio.rat_on=combine
+persist.vendor.radio.redir_party_num=0
+persist.vendor.radio.relay_oprt_change=1
+persist.vendor.radio.sib16_support=1
+persist.vendor.radio.start_ota_daemon=1
+persist.vendor.radio.sw_mbn_update=0
+ril.ecclist1=000,08,100,101,102,110,112,118,119,120,122,911,999
+ril.ecclist=000,08,100,101,102,110,112,118,119,120,122,911,999
 ril.subscription.types=NV,RUIM
+rild.libpath=/system/vendor/lib64/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
-rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
+ro.build.shutdown_timeout=0
+ro.config.always_show_roaming=true
 ro.telephony.call_ring.multiple=false
-telephony.lteOnCdmaDevice=0
+ro.use_data_netmgrd=true
+sys.vendor.shutdown.waittime=500
+telephony.lteOnCdmaDevice=1
 
 # Time
 persist.timed.enable=true

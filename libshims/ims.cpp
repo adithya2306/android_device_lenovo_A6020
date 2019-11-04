@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The CyanogenMod Project
+ * Copyright (C) 2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,7 @@
  * limitations under the License.
  */
 
-#include <openssl/evp.h>
-
-#define EVP_CIPH_RAND_KEY		0x200
-
-#define EVP_F_EVP_OPENINIT				 	102
-#define EVP_R_PUBLIC_KEY_NOT_RSA			106
-#define EVP_F_EVP_PKEY_ENCRYPT_OLD			152
-
-#define EVPerr(f,r)  void
-
-int		EVP_PKEY_decrypt_old(unsigned char *dec_key,
-			const unsigned char *enc_key,int enc_key_len,
-			EVP_PKEY *private_key);
-int		EVP_PKEY_encrypt_old(unsigned char *enc_key,
-			const unsigned char *key,int key_len,
-			EVP_PKEY *pub_key);
+// android::Fence::~Fence()
+extern "C" void _ZN7android5FenceD1Ev() {
+  // no-op, the explicit destructor was replaced with = default;
+}

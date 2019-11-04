@@ -36,6 +36,14 @@ else
     platformid=`cat /sys/devices/system/soc/soc0/id`
 fi
 
+start_copying_prebuilt_qcril_db()
+{
+    if [ -f /vendor/radio/qcril_database/qcril.db -a ! -f /data/vendor/radio/qcril.db ]; then
+        cp /vendor/radio/qcril_database/qcril.db /data/vendor/radio/qcril.db
+        chown -h radio.radio /data/vendor/radio/qcril.db
+    fi
+}
+
 start_msm_irqbalance_8939()
 {
 	if [ -f /system/vendor/bin/msm_irqbalance ]; then
@@ -52,6 +60,13 @@ echo 1 > /proc/sys/net/ipv6/conf/default/accept_ra_defrtr
 start_sensors
 start_msm_irqbalance_8939
 
+#
+# Copy qcril.db if needed for RIL
+#
+start_copying_prebuilt_qcril_db
+echo 1 > /data/vendor/radio/db_check_done
+
+
 bootmode=`getprop ro.bootmode`
 emmc_boot=`getprop ro.boot.emmc`
 case "$emmc_boot"
@@ -66,15 +81,31 @@ esac
 chown -LR system.system /proc/touchpanel
 
 #
-# Make modem config folder and copy firmware config to that folder
+# Make modem config folder and copy firmware config to that folder for RIL
 #
-rm -rf /data/misc/radio/modem_config
-mkdir /data/misc/radio/modem_config
-chmod 770 /data/misc/radio/modem_config
-cp -r /firmware/image/modem_pr/mcfg/configs/* /data/misc/radio/modem_config 
-chown -hR radio.radio /data/misc/radio/modem_config
+if [ -f /data/vendor/radio/ver_info.txt ]; then
+    prev_version_info=`cat /data/vendor/radio/ver_info.txt`
+else
+    prev_version_info=""
+fi
+
+cur_version_info=`cat /firmware/verinfo/ver_info.txt`
+if [ ! -f /firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
+    rm -rf /data/vendor/radio/modem_config
+    mkdir /data/vendor/radio/modem_config
+    chmod 770 /data/vendor/radio/modem_config
+    cp -r /firmware/image/modem_pr/mcfg/configs/* /data/vendor/radio/modem_config
+    chown -hR radio.radio /data/vendor/radio/modem_config
+    cp /firmware/verinfo/ver_info.txt /data/vendor/radio/ver_info.txt
+    chown radio.radio /data/vendor/radio/ver_info.txt
+fi
+
+if [ -f /system/etc/mbn_ota.txt ] && [ ! -f /data/misc/radio/modem_config/mbn_ota.txt ]; then
+    cp /system/etc/mbn_ota.txt /data/vendor/radio/modem_config
+    chown radio.radio /data/vendor/radio/modem_config/mbn_ota.txt
+fi
+
 echo 1 > /data/misc/radio/copy_complete
-chown radio:radio /data/misc/radio/copy_complete
 
 # Create /persist/alarm if necessary
 if [ ! -d /persist/alarm ]; then

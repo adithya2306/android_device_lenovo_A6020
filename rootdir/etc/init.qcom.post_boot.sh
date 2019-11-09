@@ -244,6 +244,10 @@ case "$target" in
 	            ;;
                 esac
             fi
+
+            # Limit min frequency to 200MHz in msm_performance
+            echo "0:200000 4:200000" > /sys/module/msm_performance/parameters/cpu_min_freq
+
             ;;
         esac
 

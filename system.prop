@@ -61,6 +61,10 @@ drm.service.enabled=1
 persist.dbg.volte_avail_ovr=1
 persist.dbg.vt_avail_ovr=0
 persist.dbg.wfc_avail_ovr=0
+persist.ims.disableADBLogs=1
+persist.ims.disableDebugLogs=1
+persist.ims.disableIMSLogs=1
+persist.ims.disableQXDMLogs=1
 
 # Media
 debug.stagefright.ccodec=0

@@ -184,7 +184,7 @@ PRODUCT_PACKAGES += \
     libbson \
     libshim_gui \
     libshim_atomic \
-    Camera2
+    Snap
 
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/configs/external_camera_config.xml:system/etc/external_camera_config.xml

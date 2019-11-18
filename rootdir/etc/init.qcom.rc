@@ -398,8 +398,8 @@ on property:sys.boot_completed=1
     write /sys/module/wakeup/parameters/enable_wlan_pno_wl_ws 0
     write /sys/module/wakeup/parameters/enable_wcnss_filter_lock_ws 0
 
-    setprop ro.min_freq_0 200000
-    setprop ro.min_freq_4 200000
+    setprop ro.min_freq_0 400000
+    setprop ro.min_freq_4 499200
 
     # change GPU initial power level from 400Mhz(level 2) to 220MHz(level 3)
     write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 3

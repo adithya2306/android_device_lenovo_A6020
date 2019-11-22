@@ -60,8 +60,69 @@ void property_override_dual(char const system_prop[], char const vendor_prop[], 
     property_override(vendor_prop, value);
 }
 
-void gsm_properties(bool msim);
-void set_model_config(bool plus);
+void gsm_properties(bool msim)
+{
+    if (msim) {
+        property_set("persist.radio.multisim.config", "dsds");
+        property_set("ro.telephony.default_network", "9,9");
+    } else {
+        property_set("ro.telephony.default_network", "9");
+    }
+}
+
+void set_model_config(bool plus, bool is3gb = false)
+{
+    if (plus) {
+        property_set("ro.sf.lcd_density", "460");
+        property_override_dual("ro.product.model", "ro.vendor.product.model", "Vibe K5 Plus");
+        property_override_dual("ro.product.name", "ro.vendor.product.name", "Vibe K5 Plus");
+
+        // Cached apps limit
+        property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "25");
+
+        if (is3gb) {
+            /* Dalvik properties for 1080p/3GB
+             *
+             * https://github.com/CyanogenMod/android_frameworks_native/blob/cm-14.1/build/phone-xxhdpi-3072-dalvik-heap.mk
+             */
+            property_set("dalvik.vm.heapstartsize", "8m");
+            property_set("dalvik.vm.heapgrowthlimit", "288m");
+            property_set("dalvik.vm.heapsize", "768m");
+            property_set("dalvik.vm.heaptargetutilization", "0.75");
+            property_set("dalvik.vm.heapminfree", "512k");
+            property_set("dalvik.vm.heapmaxfree", "8m");
+        } else {
+            /* Dalvik properties for 1080p/2GB
+             *
+             * https://github.com/CyanogenMod/android_frameworks_native/blob/cm-14.1/build/phone-xxhdpi-2048-dalvik-heap.mk
+             */
+            property_set("dalvik.vm.heapstartsize", "16m");
+            property_set("dalvik.vm.heapgrowthlimit", "192m");
+            property_set("dalvik.vm.heapsize", "512m");
+            property_set("dalvik.vm.heaptargetutilization", "0.75");
+            property_set("dalvik.vm.heapminfree", "2m");
+            property_set("dalvik.vm.heapmaxfree", "8m");
+        }
+    } else {
+        property_set("ro.sf.lcd_density", "300");
+        property_override_dual("ro.product.model", "ro.vendor.product.model", "Vibe K5");
+        property_override_dual("ro.product.name", "ro.vendor.product.name", "Vibe K5");
+
+        /* Dalvik properties for 720p/2GB
+         *
+         * https://github.com/CyanogenMod/android_frameworks_native/blob/cm-14.1/build/phone-xhdpi-2048-dalvik-heap.mk
+         */
+        property_set("dalvik.vm.heapstartsize", "8m");
+        property_set("dalvik.vm.heapgrowthlimit", "192m");
+        property_set("dalvik.vm.heapsize", "512m");
+        property_set("dalvik.vm.heaptargetutilization", "0.75");
+        property_set("dalvik.vm.heapminfree", "512k");
+        property_set("dalvik.vm.heapmaxfree", "8m");
+
+        // Cached apps limit
+        property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "17");
+    }
+}
 
 void vendor_load_properties()
 {
@@ -115,8 +176,8 @@ void vendor_load_properties()
         set_model_config(false);
         gsm_properties(false);
     } else if (ISMATCH(board_id, "S82918F1")){
-        property_override_dual("ro.build.product", "ro.vendor.build.product", "A6020l36");
-        property_override_dual("ro.product.device", "ro.vendor.product.device" , "A6020l36");
+        property_override_dual("ro.build.product", "ro.vendor.build.product", "a6020l36");
+        property_override_dual("ro.product.device", "ro.vendor.product.device" , "a6020l36");
         property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Lenovo/A6020l36/A6020l36:5.1.1/LMY47V/A6020l36_S032_160401_LAS:user/release-keys");
         set_model_config(true);
         gsm_properties(true);
@@ -130,7 +191,7 @@ void vendor_load_properties()
         property_override_dual("ro.build.product", "ro.vendor.build.product", "a6020a46");
         property_override_dual("ro.product.device", "ro.vendor.product.device" , "a6020a46");
         property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Lenovo/A6020a46/A6020a46:5.1.1/LMY47V/A6020a46_S105_161124_ROW:user/release-keys");
-        set_model_config(true);
+        set_model_config(true, true);
         gsm_properties(true);
     } else {
         // Use A6020a40 as default - board_id = "S82918D1"
@@ -141,56 +202,3 @@ void vendor_load_properties()
         gsm_properties(true);
     }
 }
-
-void gsm_properties(bool msim)
-{
-    if (msim) {
-        property_set("persist.radio.multisim.config", "dsds");
-        property_set("ro.telephony.default_network", "9,9");
-    } else {
-        property_set("ro.telephony.default_network", "9");
-    }
-}
-
-void set_model_config(bool plus){
-    if (plus){
-        property_set("ro.sf.lcd_density", "460");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "Vibe K5 Plus");
-        property_override_dual("ro.product.name", "ro.vendor.product.name", "Vibe K5 Plus");
-
-	/* Dalvik properties
-         *
-         * https://github.com/CyanogenMod/android_frameworks_native/blob/cm-14.1/build/phone-xxhdpi-2048-dalvik-heap.mk
-         */
-        property_set("dalvik.vm.heapstartsize", "16m");
-        property_set("dalvik.vm.heapgrowthlimit", "192m");
-        property_set("dalvik.vm.heapsize", "512m");
-        property_set("dalvik.vm.heaptargetutilization", "0.75");
-        property_set("dalvik.vm.heapminfree", "2m");
-        property_set("dalvik.vm.heapmaxfree", "8m");
-
-        // Cached apps limit
-        property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "25");
-
-    } else {
-        property_set("ro.sf.lcd_density", "300");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "Vibe K5");
-        property_override_dual("ro.product.name", "ro.vendor.product.name", "Vibe K5");
-
-        /* Dalvik properties
-         *
-         * https://github.com/CyanogenMod/android_frameworks_native/blob/cm-14.1/build/phone-xhdpi-2048-dalvik-heap.mk
-         */
-        property_set("dalvik.vm.heapstartsize", "8m");
-        property_set("dalvik.vm.heapgrowthlimit", "192m");
-        property_set("dalvik.vm.heapsize", "512m");
-        property_set("dalvik.vm.heaptargetutilization", "0.75");
-        property_set("dalvik.vm.heapminfree", "512k");
-        property_set("dalvik.vm.heapmaxfree", "8m");
-
-        // Cached apps limit
-        property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "17");
-
-    }
-}
-

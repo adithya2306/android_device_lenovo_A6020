@@ -136,6 +136,10 @@ on boot
     chown system system /sys/class/leds/blue/led_time
     chown system system /sys/class/leds/blue/brightness
 
+    # DT2W
+    chown system system /sys/android_touch/doubletap2wake
+    chmod 0660 /sys/android_touch/doubletap2wake
+
 on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice

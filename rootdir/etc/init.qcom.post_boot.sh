@@ -76,8 +76,10 @@ case "$target" in
              echo 40 > $gpu_bimc_io_percent
         done
 
-            # disable thermal core_control to update interactive gov settings
+            # disable core control to update interactive gov settings
             echo 0 > /sys/module/msm_thermal/core_control/enabled
+            echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/disable
+            echo 1 > /sys/devices/system/cpu/cpu4/core_ctl/disable
 
             # enable governor for perf cluster
             echo 1 > /sys/devices/system/cpu/cpu0/online
@@ -119,10 +121,9 @@ case "$target" in
             echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
             echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/powersave_bias
 
-            # enable thermal core_control now
+            # enable core_control now
             echo 1 > /sys/module/msm_thermal/core_control/enabled
-
-            # enable core control
+            echo 0 > /sys/devices/system/cpu/cpu0/core_ctl/disable
             echo 0 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
             echo 4 > /sys/devices/system/cpu/cpu0/core_ctl/max_cpus
             echo 68 > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
@@ -130,7 +131,9 @@ case "$target" in
             echo 100 > /sys/devices/system/cpu/cpu0/core_ctl/offline_delay_ms
             echo 4 > /sys/devices/system/cpu/cpu0/core_ctl/task_thres
             echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/is_big_cluster
+            echo 0 > /sys/devices/system/cpu/cpu4/core_ctl/disable
             echo 2 > /sys/devices/system/cpu/cpu4/core_ctl/min_cpus
+            echo 4 > /sys/devices/system/cpu/cpu4/core_ctl/max_cpus
             echo 20 > /sys/devices/system/cpu/cpu4/core_ctl/busy_up_thres
             echo 5 > /sys/devices/system/cpu/cpu4/core_ctl/busy_down_thres
             echo 5000 > /sys/devices/system/cpu/cpu4/core_ctl/offline_delay_ms

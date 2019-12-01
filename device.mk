@@ -254,18 +254,10 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     libxml2
 
-# RRO
-PRODUCT_ENFORCE_RRO_TARGETS += \
-    frameworks-res
-
 # Telephony
 PRODUCT_PACKAGES += \
     qti-telephony-hidl-wrapper \
-    qti_telephony_hidl_wrapper.xml \
-    telephony-ext
-
-PRODUCT_BOOT_JARS += \
-    telephony-ext
+    qti_telephony_hidl_wrapper.xml
 
 # Thermal
 PRODUCT_COPY_FILES += \
@@ -308,14 +300,8 @@ PRODUCT_PACKAGES += \
     init.qcom.post_boot.sh \
     ueventd.qcom.rc
 
-# Seccomp
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:system/vendor/etc/seccomp_policy/mediacodec.policy
-
-
 ###===============================================######
 ##HIDL packages
-
 
 # HIDL
 PRODUCT_PACKAGES += \

@@ -14,24 +14,23 @@
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l_mr1.mk)
 
 # Inherit from A6020 device
 $(call inherit-product, device/lenovo/A6020/device.mk)
 
-# Inherit some common ArrowOS stuff
-$(call inherit-product-if-exists, vendor/arrow/config/common.mk)
+# Include Paranoid Android common configuration
+TARGET_BOOT_ANIMATION_RES := 1080
+TARGET_USES_QCOM_BSP := true
 
-# Boot animation
-TARGET_SCREEN_WIDTH := 1080
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_BOOTANIMATION_HALF_RES := true
+include device/qcom/common/common.mk
+include vendor/pa/config/common_full_phone.mk
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := A6020
-PRODUCT_NAME := arrow_A6020
+PRODUCT_NAME := pa_A6020
 PRODUCT_BRAND := Lenovo
 PRODUCT_MODEL := Vibe K5
 PRODUCT_MANUFACTURER := Lenovo

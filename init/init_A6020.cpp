@@ -38,45 +38,23 @@
 
 using android::init::property_set;
 
-#define ISMATCH(a,b)    (!strncmp(a,b,PROP_VALUE_MAX))
-
+#define ISMATCH(a,b) (!strncmp(a,b,PROP_VALUE_MAX))
 #define CMDLINE_SIZE 1024
 
-void property_override(char const prop[], char const value[])
+void property_override(std::string prop, std::string value)
 {
-    prop_info *pi;
+    auto pi = (prop_info*) __system_property_find(prop.c_str());
 
-    pi = (prop_info*) __system_property_find(prop);
-    if (pi)
-        __system_property_update(pi, value, strlen(value));
+    if (pi != nullptr)
+        __system_property_update(pi, value.c_str(), value.size());
     else
-        __system_property_add(prop, strlen(prop), value, strlen(value));
+        __system_property_add(prop.c_str(), prop.size(), value.c_str(), value.size());
 }
 
-void property_override_dual(char const system_prop[], char const vendor_prop[], char const value[])
-{
-    property_override(system_prop, value);
-    property_override(vendor_prop, value);
-}
-
-void gsm_properties(bool msim)
-{
-    if (msim) {
-        property_set("persist.radio.multisim.config", "dsds");
-        property_set("ro.telephony.default_network", "9,9");
-    } else {
-        property_set("ro.telephony.default_network", "9");
-    }
-}
-
-void set_model_config(bool plus, bool is3gb = false){
-    if (plus) {
+void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
+    if (fhd) {
+        // 1080p screen density
         property_set("ro.sf.lcd_density", "460");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "Vibe K5 Plus");
-        property_override_dual("ro.product.name", "ro.vendor.product.name", "Vibe K5 Plus");
-
-        // Cached apps limit
-        property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "25");
 
         if (is3gb) {
             /* Dalvik properties for 1080p/3GB
@@ -89,6 +67,9 @@ void set_model_config(bool plus, bool is3gb = false){
             property_set("dalvik.vm.heaptargetutilization", "0.75");
             property_set("dalvik.vm.heapminfree", "512k");
             property_set("dalvik.vm.heapmaxfree", "8m");
+
+            // Cached apps limit
+            property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "25");
         } else {
             /* Dalvik properties for 1080p/2GB
              *
@@ -100,11 +81,13 @@ void set_model_config(bool plus, bool is3gb = false){
             property_set("dalvik.vm.heaptargetutilization", "0.75");
             property_set("dalvik.vm.heapminfree", "2m");
             property_set("dalvik.vm.heapmaxfree", "8m");
+
+            // Cached apps limit
+            property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "17");
         }
     } else {
+        // 720p screen density
         property_set("ro.sf.lcd_density", "300");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "Vibe K5");
-        property_override_dual("ro.product.name", "ro.vendor.product.name", "Vibe K5");
 
         /* Dalvik properties for 720p/2GB
          *
@@ -120,79 +103,80 @@ void set_model_config(bool plus, bool is3gb = false){
         // Cached apps limit
         property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "17");
     }
+
+    if (dualsim) {
+        property_set("persist.radio.multisim.config", "dsds");
+        property_set("ro.telephony.default_network", "9,9");
+    } else {
+        property_set("ro.telephony.default_network", "9");
+    }
 }
 
 void vendor_load_properties()
 {
-    std::string platform;
-    std::string device;
-    char cmdlinebuff[CMDLINE_SIZE];
+    // Parse /proc/cmdline to obtain board and panel version
+    char cmdline_buff[CMDLINE_SIZE];
     char board_id[32];
     char panel_id[32];
-    FILE *fp;
 
-    if ((fp = fopen("/proc/cmdline", "r")) == NULL) {
-        printf("Failed to open /proc/cmdline");
-        return;
-    }
+    FILE *cmdline = fopen("/proc/cmdline", "r");
+    fgets(cmdline_buff, CMDLINE_SIZE, cmdline);
+    fclose(cmdline);
 
-    if (fgets(cmdlinebuff, CMDLINE_SIZE, fp) == NULL) {
-        return;
-    }
-    char *boardindex = strstr(cmdlinebuff, "board_id=");
-    if (boardindex != NULL) {
-        strncpy(board_id, strtok(boardindex + 9, ":"), 32);
-    }
-    char *panelindex = strstr(cmdlinebuff, "panel=");
-    if (panelindex != NULL) {
-        strncpy(panel_id, strtok(panelindex + 28, ":"), 32);
-    }
-    fclose(fp);
+    char *boardindex = strstr(cmdline_buff, "board_id=");
+    char *panelindex = strstr(cmdline_buff, "panel=");
+    strncpy(board_id, strtok(boardindex + 9, ":"), 32);
+    strncpy(panel_id, strtok(panelindex + 28, ":"), 32);
 
-    if (ISMATCH(board_id, "S82918B1")){
+    // Use A6020a40 as default - SD415/2GB/720p - board_id = "S82918D1"
+    std::string device = "A6020a40";
+    std::string fingerprint = "Lenovo/A6020a40/A6020a40:5.1.1/LMY47V/A6020a40_S102_161123_ROW:user/release-keys";
+
+    // Determine variant and fingerprint
+    if (ISMATCH(board_id, "S82918B1")) {
         if (ISMATCH(panel_id, "ili9881c_720p_video") || ISMATCH(panel_id, "hx8394f_boe_720p_video")) {
-            property_override_dual("ro.build.product", "ro.vendor.build.product", "a6020a40");
-            property_override_dual("ro.product.device", "ro.vendor.product.device" , "a6020a40");
-            property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Lenovo/A6020a40/A6020a40:5.1.1/LMY47V/A6020a40_S007_161128_ROW:user/release-keys");
-            set_model_config(false); // 720p
-        } else { // panel_id = "otm1901a_tm_1080p_video" for A6020a46
-            property_override_dual("ro.build.product", "ro.vendor.build.product", "a6020a46");
-            property_override_dual("ro.product.device", "ro.vendor.product.device" , "a6020a46");
-            property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Lenovo/A6020a46/A6020a46:5.1.1/LMY47V/A6020a46_S042_160516_ROW:user/release-keys");
-            set_model_config(true); // 1080p
+            // HW39 variant - SD616/2GB/720p
+            device = "A6020a40";
+            fingerprint = "Lenovo/A6020a40/A6020a40:5.1.1/LMY47V/A6020a40_S105_161128_ROW:user/release-keys";
+            configure_variant(false); // 720p
+        } else {
+            // SD616/2GB/1080p, panel_id = "otm1901a_tm_1080p_video"
+            device = "A6020a46";
+            fingerprint = "Lenovo/A6020a46/A6020a46:5.1.1/LMY47V/A6020a46_S042_160516_ROW:user/release-keys";
+            configure_variant(true); // 1080p
         }
-        gsm_properties(true);
-    } else if (ISMATCH(board_id, "S82918E1")){
-        property_override_dual("ro.build.product", "ro.vendor.build.product", "a6020a41");
-        property_override_dual("ro.product.device", "ro.vendor.product.device" , "a6020a41");
-        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Lenovo/A6020a41/A6020a41:5.1.1/LMY47V/A6020a41_S102_161123_ROW:user/release-keys");
-        set_model_config(false);
-        gsm_properties(false);
-    } else if (ISMATCH(board_id, "S82918F1")){
-        property_override_dual("ro.build.product", "ro.vendor.build.product", "a6020l36");
-        property_override_dual("ro.product.device", "ro.vendor.product.device" , "a6020l36");
-        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Lenovo/A6020l36/A6020l36:5.1.1/LMY47V/A6020l36_S032_160401_LAS:user/release-keys");
-        set_model_config(true);
-        gsm_properties(true);
-    } else if (ISMATCH(board_id, "S82918G1")){
-        property_override_dual("ro.build.product", "ro.vendor.build.product", "a6020l37");
-        property_override_dual("ro.product.device", "ro.vendor.product.device" , "a6020l37");
-        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Lenovo/A6020l37/A6020l37:5.1.1/LMY47V/A6020l37_S014_160402_LAS:user/release-keys");
-        set_model_config(true);
-        gsm_properties(false);
-    } else if (ISMATCH(board_id, "S82918H1")){
-        property_override_dual("ro.build.product", "ro.vendor.build.product", "a6020a46");
-        property_override_dual("ro.product.device", "ro.vendor.product.device" , "a6020a46");
-        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Lenovo/A6020a46/A6020a46:5.1.1/LMY47V/A6020a46_S105_161124_ROW:user/release-keys");
-        set_model_config(true, true);
-        gsm_properties(true);
-    } else {
-        // Use A6020a40 as default - board_id = "S82918D1"
-        property_override_dual("ro.build.product", "ro.vendor.build.product", "a6020a40");
-        property_override_dual("ro.product.device", "ro.vendor.product.device" , "a6020a40");
-        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "Lenovo/A6020a40/A6020a40:5.1.1/LMY47V/A6020a40_S102_161123_ROW:user/release-keys");
-        set_model_config(false);
-        gsm_properties(true);
+    } else if (ISMATCH(board_id, "S82918E1")) {
+        // SD415/2GB/720p, single SIM
+        device = "A6020a41";
+        fingerprint = "Lenovo/A6020a41/A6020a41:5.1.1/LMY47V/A6020a41_S_S028_160922_ROW:user/release-keys";
+        configure_variant(false, false);
+    } else if (ISMATCH(board_id, "S82918F1")) {
+        // SD616/2GB/1080p, Latin America
+        device = "A6020l36";
+        fingerprint = "Lenovo/A6020l36/A6020l36:6.0.1/MMB29M/A6020l36_S155_170212_LAS:user/release-keys";
+        configure_variant(true);
+    } else if (ISMATCH(board_id, "S82918G1")) {
+        // SD616/2GB/1080p, single SIM, Latin America
+        device = "A6020l37";
+        fingerprint = "Lenovo/A6020l37/A6020l37:5.1.1/LMY47V/A6020l37_S029_170321_LAS:user/release-keys";
+        configure_variant(true, false);
+    } else if (ISMATCH(board_id, "S82918H1")) {
+        // SD616/3GB/1080p
+        device = "A6020a46";
+        fingerprint = "Lenovo/A6020a46/A6020a46:5.1.1/LMY47V/A6020a46_S105_161124_ROW:user/release-keys";
+        configure_variant(true, true, true);
+    }
+
+    // Override 'em all props
+    std::string model = "Lenovo " + device;
+    std::string prop_partitions[] = { "", "system.", "vendor." };
+
+    for(const std::string &prop : prop_partitions) {
+        property_override(std::string("ro.product.") + prop + std::string("name"), device);
+        property_override(std::string("ro.product.") + prop + std::string("device"), device);
+        property_override(std::string("ro.product.") + prop + std::string("model"), model);
+        property_override(std::string("ro.") + prop + std::string("build.product"), device);
+        property_override(std::string("ro.") + prop + std::string("build.fingerprint"), fingerprint);
     }
 
     // Init a dummy BT MAC address, will be overwritten later

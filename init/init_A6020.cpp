@@ -153,7 +153,7 @@ void vendor_load_properties()
     } else if (ISMATCH(board_id, "S82918F1")) {
         // SD616/2GB/1080p, Latin America
         device = "A6020l36";
-        fingerprint = "Lenovo/A6020l36/A6020l36:6.0.1/MMB29M/A6020l36_S155_170212_LAS:user/release-keys";
+        fingerprint = "Lenovo/A6020l36/A6020l36:5.1.1/LMY47V/A6020l36_S042_161209_LAS:user/release-keys";
         configure_variant(true);
     } else if (ISMATCH(board_id, "S82918G1")) {
         // SD616/2GB/1080p, single SIM, Latin America
@@ -165,6 +165,9 @@ void vendor_load_properties()
         device = "A6020a46";
         fingerprint = "Lenovo/A6020a46/A6020a46:5.1.1/LMY47V/A6020a46_S105_161124_ROW:user/release-keys";
         configure_variant(true, true, true);
+    } else {
+        // Default to A6020a40 - SD415/2GB/720p - board_id = "S82918D1"
+        configure_variant(false);
     }
 
     // Override 'em all props

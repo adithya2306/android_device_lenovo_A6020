@@ -338,9 +338,8 @@ service vm_bms /system/vendor/bin/vm_bms
 
 service charger /sbin/poweroffcharge
     class charger
-    user system
-    group system graphics input
-    critical
+    user root
+    group root system graphics input
 
 service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
     class core

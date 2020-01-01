@@ -195,6 +195,9 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 TARGET_RIL_VARIANT := caf
 BOARD_PROVIDES_LIBRIL := false
 
+# SDCLANG
+TARGET_USE_SDCLANG := true
+
 # SELinux
 #include device/qcom/sepolicy-legacy/sepolicy.mk
 

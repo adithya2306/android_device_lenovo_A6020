@@ -1,6 +1,6 @@
 #
 # Copyright (C) 2013-2016 The CyanogenMod Project
-#           (C) 2017-2018 The LineageOS Project
+#           (C) 2017-2018 The waveOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,5 +15,4 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_A6020.mk \
-    $(LOCAL_DIR)/lineage_A6020.mk
+    $(LOCAL_DIR)/wave_A6020.mk

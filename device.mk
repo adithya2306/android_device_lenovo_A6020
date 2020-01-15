@@ -183,6 +183,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     ParanoidDoze
 
+# Privapp permissions
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/privapp-permissions-lineage.xml:system/etc/permissions/privapp-permissions-lineage.xml
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.primary.msm8916 \

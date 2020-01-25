@@ -182,6 +182,9 @@ on fs
 
     mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
 
+on post-fs
+    start qseecomd
+
 on post-fs-data
     # Create folder for mm-qcamera-daemon
     mkdir /data/misc/camera 0770 camera camera
@@ -262,6 +265,7 @@ service qseecomd /system/vendor/bin/qseecomd
     class core
     user root
     group root
+    disabled
     writepid /dev/cpuset/system-background/tasks
 
 service thermal-engine /system/vendor/bin/thermal-engine

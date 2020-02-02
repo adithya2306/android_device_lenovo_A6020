@@ -209,9 +209,6 @@ PRODUCT_PACKAGES += \
     libbson \
     Snap
 
-PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/configs/external_camera_config.xml:system/etc/external_camera_config.xml
-
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8916

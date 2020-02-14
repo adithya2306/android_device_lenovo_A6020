@@ -56,6 +56,9 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
         // 1080p screen density
         property_set("ro.sf.lcd_density", "460");
 
+        // Enable triple buffering
+        property_set("ro.surface_flinger.max_frame_buffer_acquired_buffers", "3");
+
         if (is3gb) {
             /* Dalvik properties for 1080p/3GB
              *
@@ -69,7 +72,7 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
             property_set("dalvik.vm.heapmaxfree", "8m");
 
             // Cached apps limit
-            property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "25");
+            property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "20");
         } else {
             /* Dalvik properties for 1080p/2GB
              *
@@ -83,7 +86,7 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
             property_set("dalvik.vm.heapmaxfree", "8m");
 
             // Cached apps limit
-            property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "17");
+            property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "12");
         }
     } else {
         // 720p screen density
@@ -101,7 +104,7 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
         property_set("dalvik.vm.heapmaxfree", "8m");
 
         // Cached apps limit
-        property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "17");
+        property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "15");
     }
 
     if (dualsim) {

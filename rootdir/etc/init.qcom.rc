@@ -418,9 +418,6 @@ on property:sys.boot_completed=1
     setprop ro.min_freq_0 200000
     setprop ro.min_freq_4 200000
 
-    # change GPU initial power level from 400Mhz(level 2) to 220MHz(level 3)
-    write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 3
-
     # update cpusets now that boot is complete and we want
     # better load balancing
     write /dev/cpuset/foreground/cpus 0-6

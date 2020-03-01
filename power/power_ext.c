@@ -23,6 +23,8 @@
 #include <utils/Log.h>
 
 #define BIG_MAX_CPU_PATH "/sys/devices/system/cpu/cpu0/core_ctl/max_cpus"
+#define BIG_MIN_CPU_PATH "/sys/devices/system/cpu/cpu0/core_ctl/min_cpus"
+#define BIG_ALWAYS_ONLINE_CPU_PATH "/sys/devices/system/cpu/cpu0/core_ctl/always_online_cpu"
 
 static void sysfs_write(char *path, char *s)
 {
@@ -49,4 +51,6 @@ void power_set_interactive_ext(int on)
 {
     ALOGD("%sabling big CPU cluster", on ? "En" : "Dis");
     sysfs_write(BIG_MAX_CPU_PATH, on ? "4" : "0");
+    sysfs_write(BIG_MIN_CPU_PATH, on ? "1" : "0");
+    sysfs_write(BIG_ALWAYS_ONLINE_CPU_PATH, on ? "1 0 0 0" : "0 0 0 0");
 }

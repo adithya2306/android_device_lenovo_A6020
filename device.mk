@@ -254,6 +254,10 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     libxml2
 
+# RRO
+PRODUCT_ENFORCE_RRO_TARGETS += \
+    frameworks-res
+
 # Telephony
 PRODUCT_PACKAGES += \
     qti-telephony-hidl-wrapper \

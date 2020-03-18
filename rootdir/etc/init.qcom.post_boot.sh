@@ -120,9 +120,9 @@ case "$target" in
             # enable core_control now
             echo 1 > /sys/module/msm_thermal/core_control/enabled
             echo 0 > /sys/devices/system/cpu/cpu0/core_ctl/disable
-            echo 2 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
+            echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
             echo 4 > /sys/devices/system/cpu/cpu0/core_ctl/max_cpus
-            echo "1 1 0 0" > /sys/devices/system/cpu/cpu0/core_ctl/always_online_cpu
+            echo "1 0 0 0" > /sys/devices/system/cpu/cpu0/core_ctl/always_online_cpu
             echo 40 > /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
             echo 25 > /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
             echo 1000 > /sys/devices/system/cpu/cpu0/core_ctl/offline_delay_ms

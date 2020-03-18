@@ -342,7 +342,7 @@ service vm_bms /system/vendor/bin/vm_bms
     user root
     group root wakelock
 
-service charger /sbin/poweroffcharge
+service charger /system/bin/charger
     class charger
     user root
     group root system graphics input

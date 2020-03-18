@@ -31,8 +31,8 @@ av.offload.enable=true
 vendor.audio.dolby.ds2.enabled=true
 
 # Bluetooth
-vendor.bluetooth.soc=smd
-vendor.qcom.bluetooth.soc=smd
+vendor.bluetooth.soc=pronto
+vendor.qcom.bluetooth.soc=pronto
 ro.bluetooth.dun=true
 ro.bluetooth.hfp.ver=1.7
 ro.bluetooth.sap=true

@@ -6,5 +6,9 @@
   {
     "repository": "android_vendor_lenovo_A6020",
     "target_path": "vendor/lenovo/A6020"
+  },
+  {
+    "repository": "prebuilts_gcc_linux-x86_aarch64_aarch64-linaro-7",
+    "target_path": "prebuilts/gcc/linux-x86/aarch64/aarch64-linaro-7"
   }
 ]

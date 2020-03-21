@@ -56,9 +56,6 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
         // 1080p screen density
         property_set("ro.sf.lcd_density", "460");
 
-        // Enable triple buffering
-        property_set("ro.surface_flinger.max_frame_buffer_acquired_buffers", "3");
-
         if (is3gb) {
             /* Dalvik properties for 1080p/3GB
              *

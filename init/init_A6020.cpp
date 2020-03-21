@@ -70,6 +70,9 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
 
             // Cached apps limit
             property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "38");
+
+            // Trim memory
+            property_set("ro.vendor.qti.sys.fw.trim_enable_memory", "2147483648");
         } else {
             /* Dalvik properties for 1080p/2GB
              *

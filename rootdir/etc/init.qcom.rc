@@ -379,10 +379,6 @@ service qcom-sh /system/vendor/bin/init.qcom.sh
     user root
     oneshot
 
-service qcom-mem /system/vendor/bin/init.qcom.mem.sh
-    disabled
-    oneshot
-
 service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     class late_start
     user root
@@ -391,7 +387,6 @@ service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
 
 on property:sys.boot_completed=1
     start qcom-sh
-    start qcom-mem-sh
     start qcom-post-boot
     setprop sys.io.scheduler "cfq"
     restart cameraserver

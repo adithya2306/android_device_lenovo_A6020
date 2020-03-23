@@ -42,6 +42,13 @@ on init
     # Enable power-on alarm
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
+    # add a cpuset for the camera daemon
+    # we want all cores for camera
+    mkdir /dev/cpuset/camera-daemon
+    chown system system /dev/cpuset/camera-daemon
+    chown system system /dev/cpuset/camera-daemon/tasks
+    chmod 0664 /dev/cpuset/camera-daemon/tasks
+
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -139,6 +146,15 @@ on boot
     chown system system /sys/android_touch/doubletap2wake
     chmod 0660 /sys/android_touch/doubletap2wake
 
+    # update cpusets now that cpus are up
+    # reserve cpu3 for camera and top app
+    write /dev/cpuset/foreground/cpus 0-2,4-7
+    write /dev/cpuset/background/cpus 4-5
+    write /dev/cpuset/system-background/cpus 4-7
+    write /dev/cpuset/camera-daemon/cpus 0-7
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/restricted/cpus 4-7
+
 on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -228,25 +244,25 @@ on property:init.svc.servicemanager=restarting
     restart qcamerasvr
 
 service qseecomd /system/vendor/bin/qseecomd
-   class core
-   user root
-   group root
-   writepid /dev/cpuset/system-background/tasks
+    class core
+    user root
+    group root
+    writepid /dev/cpuset/system-background/tasks
 
 service thermal-engine /system/vendor/bin/thermal-engine
-   class main
-   user root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
-   group root
-   writepid /dev/cpuset/system-background/tasks
+    class main
+    user root
+    socket thermal-send-client stream 0666 system system
+    socket thermal-recv-client stream 0660 system system
+    socket thermal-recv-passive-client stream 0666 system system
+    group root
+    writepid /dev/cpuset/system-background/tasks
 
 service time_daemon /system/vendor/bin/time_daemon
-   class late_start
-   user root
-   group root
-   writepid /dev/cpuset/system-background/tasks
+    class late_start
+    user root
+    group root
+    writepid /dev/cpuset/system-background/tasks
 
 service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
     class main
@@ -284,6 +300,7 @@ service qmuxd /system/vendor/bin/qmuxd
     class main
     user root
     group radio audio bluetooth gps oem_2950 wakelock
+    writepid /dev/cpuset/system-background/tasks
 
 service netmgrd /system/vendor/bin/netmgrd
     class main
@@ -342,6 +359,7 @@ service vm_bms /system/vendor/bin/vm_bms
     class main
     user root
     group root wakelock
+    writepid /dev/cpuset/system-background/tasks
 
 service charger /system/bin/charger
     class charger
@@ -401,7 +419,7 @@ on property:sys.boot_completed=1
     write /sys/class/net/rmnet0/queues/rx-0/rps_cpus 10
 
     # add a cpuset for the camera daemon
-    # we want all the little cores for camera
+    # we want all cores for camera
     mkdir /dev/cpuset/camera-daemon
     chown system system /dev/cpuset/camera-daemon
     chown system system /dev/cpuset/camera-daemon/tasks
@@ -420,15 +438,6 @@ on property:sys.boot_completed=1
 
     setprop ro.min_freq_0 200000
     setprop ro.min_freq_4 200000
-
-    # update cpusets now that boot is complete and we want
-    # better load balancing
-    write /dev/cpuset/foreground/cpus 0-6
-    write /dev/cpuset/background/cpus 4-6
-    write /dev/cpuset/system-background/cpus 4-6
-    write /dev/cpuset/top-app/cpus 0-7
-    write /dev/cpuset/camera-daemon/cpus 4-7
-    write /dev/cpuset/restricted/cpus 4-7
 
 on property:init.svc.surfaceflinger=restarting
     stop hwcomposer-2-1

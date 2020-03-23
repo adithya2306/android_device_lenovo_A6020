@@ -61,7 +61,7 @@ TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
 	/system/bin/mediaserver=22 \
 	/system/vendor/bin/mm-qcamera-daemon=22
-TARGET_USES_QTI_CAMERA_DEVICE := false
+TARGET_USES_MEDIA_EXTENSIONS := true
 
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true

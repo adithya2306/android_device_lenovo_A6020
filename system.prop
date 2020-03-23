@@ -131,17 +131,20 @@ ro.com.google.clientidbase.ms=android-lenovo
 ro.com.google.clientidbase.yt=android-lenovo
 
 # Radio
-DEVICE_PROVISIONED=1
-persist.data.mode=concurrent
 persist.data.netmgrd.qos.enable=true
 persist.data.qmi.adb_logmask=0
 persist.radio.add_power_save=1
 persist.radio.apm_sim_not_pwdn=1
+persist.radio.data_con_rprt=1
+persist.radio.data_ltd_sys_ind=1
+persist.radio.mt_sms_ack=20
+persist.radio.no_cons_man_roam=1
+persist.radio.rat_on=combine
+persist.radio.sib16_support=1
 ril.subscription.types=NV,RUIM
 rild.libargs=-d /dev/smd0
 rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 ro.telephony.call_ring.multiple=false
-telephony.lteOnCdmaDevice=0
 
 # Time
 persist.timed.enable=true

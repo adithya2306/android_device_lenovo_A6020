@@ -54,7 +54,7 @@ void property_override(std::string prop, std::string value)
 void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
     if (fhd) {
         // 1080p screen density
-        property_set("ro.sf.lcd_density", "460");
+        property_set("ro.sf.lcd_density", "450");
 
         if (is3gb) {
             /* Dalvik properties for 1080p/3GB
@@ -93,7 +93,7 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
         }
     } else {
         // 720p screen density
-        property_set("ro.sf.lcd_density", "300");
+        property_set("ro.sf.lcd_density", "290");
 
         /* Dalvik properties for 720p/2GB
          *

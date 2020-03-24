@@ -6,3 +6,6 @@ allow init hwservicemanager:binder { call transfer };
 allow init sysfs_leds:lnk_file read;
 allow init system_server:binder call;
 allow init vendor_file:file execute_no_trans;
+allow init vendor_data_file:file lock;
+allow init hal_audio_default:binder call;
+allow init platform_app:binder call;

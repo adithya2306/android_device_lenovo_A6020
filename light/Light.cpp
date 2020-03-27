@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-//Author := dev_harsh1998
- 
+
+// Author := dev_harsh1998 and ghostrider-reborn
+
 #define LOG_TAG "LightService-A6020"
 #include <log/log.h>
 #include "Light.h"
@@ -29,6 +29,7 @@ namespace implementation {
 
 #define LEDS            "/sys/class/leds/"
 #define LCD_LED         LEDS "lcd-backlight/"
+#define GREEN_LED       LEDS "green/"
 #define BRIGHTNESS      "brightness"
 
 /*
@@ -48,8 +49,15 @@ static void handleBacklight(const LightState& state) {
     set(LCD_LED BRIGHTNESS, brightness);
 }
 
+static void handleNotification(const LightState& state) {
+    uint32_t brightness = state.color & 0xFF;
+    set(GREEN_LED BRIGHTNESS, brightness);
+}
+
 static std::map<Type, std::function<void(const LightState&)>> lights = {
     {Type::BACKLIGHT, handleBacklight},
+    {Type::BATTERY, handleNotification},
+    {Type::NOTIFICATIONS, handleNotification},
 };
 
 Light::Light() {}

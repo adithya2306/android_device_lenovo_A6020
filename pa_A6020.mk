@@ -24,6 +24,7 @@ $(call inherit-product, device/lenovo/A6020/device.mk)
 # Include Paranoid Android common configuration
 TARGET_BOOT_ANIMATION_RES := 1080
 TARGET_USES_QCOM_BSP := true
+TARGET_GAPPS_ARCH := arm64
 
 include device/qcom/common/common.mk
 include vendor/pa/config/common_full_phone.mk

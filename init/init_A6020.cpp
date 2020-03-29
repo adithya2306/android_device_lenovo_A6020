@@ -33,13 +33,48 @@
 #include <stdlib.h>
 
 #include <android-base/properties.h>
+#include <android-base/file.h>
+#include <android-base/strings.h>
+
 #include "property_service.h"
 #include "vendor_init.h"
 
 using android::init::property_set;
+using android::base::ReadFileToString;
+using android::base::Trim;
+using android::base::GetProperty;
 
 #define ISMATCH(a,b) (!strncmp(a,b,PROP_VALUE_MAX))
 #define CMDLINE_SIZE 1024
+
+static void init_alarm_boot_properties()
+{
+    char const *boot_reason_file = "/proc/sys/kernel/boot_reason";
+    std::string boot_reason;
+    std::string alarm_boot = GetProperty("ro.boot.alarmboot","");
+
+    if (ReadFileToString(boot_reason_file, &boot_reason)) {
+        /*
+         * Setup ro.alarm_boot value to true when it is RTC triggered boot up
+         * For existing PMIC chips, the following mapping applies
+         * for the value of boot_reason:
+         *
+         * 0 -> unknown
+         * 1 -> hard reset
+         * 2 -> sudden momentary power loss (SMPL)
+         * 3 -> real time clock (RTC)
+         * 4 -> DC charger inserted
+         * 5 -> USB charger insertd
+         * 6 -> PON1 pin toggled (for secondary PMICs)
+         * 7 -> CBLPWR_N pin toggled (for external power supply)
+         * 8 -> KPDPWR_N pin toggled (power key pressed)
+         */
+        if (Trim(boot_reason) == "3" || alarm_boot == "true")
+            property_set("ro.vendor.alarm_boot", "true");
+        else
+            property_set("ro.vendor.alarm_boot", "false");
+    }
+}
 
 void property_override(std::string prop, std::string value)
 {
@@ -193,4 +228,7 @@ void vendor_load_properties()
 
     // Init a dummy BT MAC address, will be overwritten later
     property_set("ro.boot.btmacaddr", "00:00:00:00:00:00");
+
+    // Configure alarm boot
+    init_alarm_boot_properties();
 }

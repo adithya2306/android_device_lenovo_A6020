@@ -177,6 +177,8 @@ on fs
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
     write /sys/block/mmcblk1/queue/iostats 0
     write /sys/block/mmcblk1/queue/read_ahead_kb 1024
+    rm /cache/boot_lc_main.txt
+    start boot_lc_main
 
     mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
 
@@ -425,11 +427,19 @@ service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     disabled
     oneshot
 
+service boot_lc_main /system/bin/logcat -f /cache/boot_lc_main.txt
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
 on property:sys.boot_completed=1
     start qcom-sh
     start qcom-post-boot
     setprop sys.io.scheduler "cfq"
     restart cameraserver
+    stop boot_lc_main
 
     # Enable zram
     swapon_all /system/vendor/etc/fstab.qcom

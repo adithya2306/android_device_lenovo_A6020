@@ -108,6 +108,9 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
 
             // Trim memory
             property_set("ro.vendor.qti.sys.fw.trim_enable_memory", "2147483648");
+
+            // Disable low ram flag
+            property_set("ro.config.low_ram", "false");
         } else {
             /* Dalvik properties for 1080p/2GB
              *
@@ -122,9 +125,6 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
 
             // Cached apps limit
             property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "24");
-
-            // Enable low ram flag
-            property_set("ro.config.low_ram", "true");
         }
     } else {
         // 720p screen density
@@ -143,9 +143,6 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
 
         // Cached apps limit
         property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "26");
-
-        // Enable low ram flag
-        property_set("ro.config.low_ram", "true");
     }
 
     if (dualsim) {

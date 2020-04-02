@@ -781,8 +781,11 @@ case "$target" in
                 do
                          echo 40 > $gpu_bimc_io_percent
                 done
-                # disable thermal core_control to update interactive gov settings
+
+                # disable core_control to update interactive gov settings
                 echo 0 > /sys/module/msm_thermal/core_control/enabled
+                echo 1 > /sys/devices/system/cpu/cpu0/core_ctl/disable
+                echo 1 > /sys/devices/system/cpu/cpu4/core_ctl/disable
 
                 # enable governor for perf cluster
                 echo 1 > /sys/devices/system/cpu/cpu0/online

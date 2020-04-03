@@ -34,4 +34,5 @@
     <!-- Whitelist IMS packages from doze -->
     <allow-in-power-save package="org.codeaurora.ims" />
     <allow-in-power-save package="com.qualcomm.qti.ims" />
+    <allow-in-power-save package="com.android.musicfx" />
 </config>

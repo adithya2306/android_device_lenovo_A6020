@@ -21,16 +21,13 @@
 #include "Light.h"
 #include <fstream>
 
-namespace android {
-namespace hardware {
-namespace light {
-namespace V2_0 {
-namespace implementation {
-
 #define LEDS            "/sys/class/leds/"
 #define LCD_LED         LEDS "lcd-backlight/"
 #define GREEN_LED       LEDS "green/"
+#define RED_LED         LEDS "red/"
 #define BRIGHTNESS      "brightness"
+
+namespace {
 
 /*
  * Write value to path and close file.
@@ -50,23 +47,81 @@ static void set(std::string path, int value) {
     set(path, std::to_string(value));
 }
 
-static void handleBacklight(const LightState& state) {
-    uint32_t brightness = state.color & 0xFF;
+static void handleBacklight(Type, const LightState& state) {
+    uint32_t color = state.color & 0x00ffffff;
+    uint32_t brightness = ((77 * ((color >> 16) & 0xff))
+            + (150 * ((color >> 8) & 0xff))
+            + (29 * (color & 0xff))) >> 8;
+
     set(LCD_LED BRIGHTNESS, brightness);
 }
 
-static void handleNotification(const LightState& state) {
-    uint32_t brightness = state.color & 0xFF;
-    set(GREEN_LED BRIGHTNESS, brightness);
+static void setNotification(const LightState& state) {
+    uint32_t redBrightness, greenBrightness, brightness;
+
+    /*
+     * Extract brightness from AARRGGBB.
+     */
+    redBrightness = (state.color >> 16) & 0xFF;
+    greenBrightness = (state.color >> 8) & 0xFF;
+
+    brightness = (state.color >> 24) & 0xFF;
+
+    /*
+     * Scale RGB brightness if the Alpha brightness is not 0xFF.
+     */
+    if (brightness != 0xFF) {
+        redBrightness = (redBrightness * brightness) / 0xFF;
+        greenBrightness = (greenBrightness * brightness) / 0xFF;
+    }
+
+    set(GREEN_LED BRIGHTNESS, greenBrightness);
+    set(RED_LED BRIGHTNESS, redBrightness);
 }
 
-static std::map<Type, std::function<void(const LightState&)>> lights = {
-    {Type::BACKLIGHT, handleBacklight},
-    {Type::BATTERY, handleNotification},
-    {Type::NOTIFICATIONS, handleNotification},
+static inline bool isLit(const LightState& state) {
+    return state.color & 0x00ffffff;
+}
+
+/*
+ * Keep sorted in the order of importance.
+ */
+static const LightState offState = {};
+static std::vector<std::pair<Type, LightState>> notificationStates = {
+    { Type::ATTENTION, offState },
+    { Type::NOTIFICATIONS, offState },
+    { Type::BATTERY, offState },
 };
 
-Light::Light() {}
+static void handleNotification(Type type, const LightState& state) {
+    for(auto it : notificationStates) {
+        if (it.first == type) {
+            it.second = state;
+        }
+
+        if  (isLit(it.second)) {
+            setNotification(it.second);
+            return;
+        }
+    }
+
+    setNotification(offState);
+}
+
+static std::map<Type, std::function<void(Type type, const LightState&)>> lights = {
+    { Type::ATTENTION, handleNotification },
+    { Type::NOTIFICATIONS, handleNotification },
+    { Type::BATTERY, handleNotification },
+    { Type::BACKLIGHT, handleBacklight },
+};
+
+} // anonymous namespace
+
+namespace android {
+namespace hardware {
+namespace light {
+namespace V2_0 {
+namespace implementation {
 
 Return<Status> Light::setLight(Type type, const LightState& state) {
     auto it = lights.find(type);
@@ -80,7 +135,7 @@ Return<Status> Light::setLight(Type type, const LightState& state) {
     */
 
     std::lock_guard<std::mutex> lock(globalLock);
-    it->second(state);
+    it->second(type, state);
     return Status::SUCCESS;
 }
 

@@ -26,8 +26,7 @@ TARGET_BOOT_ANIMATION_RES := 1080
 TARGET_USES_QCOM_BSP := true
 TARGET_GAPPS_ARCH := arm64
 
-include device/qcom/common/common.mk
-include vendor/pa/config/common_full_phone.mk
+$(call inherit-product, vendor/pa/config/common_full_phone.mk)
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := A6020

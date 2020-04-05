@@ -60,8 +60,8 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
-	/system/bin/mediaserver=22 \
-	/system/vendor/bin/mm-qcamera-daemon=22
+	/system/bin/mediaserver=23 \
+	/system/vendor/bin/mm-qcamera-daemon=23
 
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
@@ -201,11 +201,6 @@ BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy-tmp
 
 # Shims
 TARGET_LD_SHIM_LIBS := \
-    /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_gui.so \
-    /system/vendor/lib/libmmcamera2_stats_modules.so|libshim_atomic.so \
-    /system/lib/hw/camera.vendor.msm8916.so|libshim_atomic.so \
-    /system/lib/libmmjpeg_interface.so|libshim_atomic.so \
-    /system/vendor/lib/libmmcamera2_imglib_modules.so|libshim_atomic.so \
     /system/vendor/lib64/lib-imsdpl.so|libshims_boringssl.so \
     /system/vendor/lib64/lib-imsvt.so|libshims_ims.so
 

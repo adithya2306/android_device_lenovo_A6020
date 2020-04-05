@@ -204,8 +204,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.msm8916 \
     libbson \
-    libshim_gui \
-    libshim_atomic \
     Snap
 
 PRODUCT_COPY_FILES += \

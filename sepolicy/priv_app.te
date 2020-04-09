@@ -1,0 +1,2 @@
+get_prop(priv_app, qemu_hw_mainkeys_prop)
+

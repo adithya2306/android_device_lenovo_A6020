@@ -307,6 +307,7 @@ service hciattach /system/vendor/bin/init.qcom.bt.sh
     class late_start
     user bluetooth
     group bluetooth net_bt_admin
+    seclabel u:r:bluetooth_loader:s0
     disabled
     oneshot
 
@@ -394,6 +395,7 @@ service charger /system/bin/charger
     class charger
     user root
     group root system graphics input
+    seclabel u:r:charger:s0
     capabilities SYS_BOOT
 
 service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf

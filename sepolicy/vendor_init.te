@@ -1,0 +1,2 @@
+allow vendor_init proc_kernel_sched:file write;
+allow vendor_init proc_swap:file write;

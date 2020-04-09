@@ -1,0 +1,3 @@
+wifi.active.interface    u:object_r:exported_wifi_prop:s0
+qemu.hw.mainkeys         u:object_r:qemu_hw_mainkeys_prop:s0
+

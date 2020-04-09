@@ -1,0 +1,12 @@
+# cgroup
+/dev/cpuset(/.*)?                                                    u:object_r:cgroup:s0
+
+# lights hal
+/system/vendor/bin/hw/android\.hardware\.light@2\.0-service.A6020    u:object_r:hal_light_default_exec:s0
+/sys/class/leds(/.*)?                                                u:object_r:sysfs_leds:s0
+
+# powerhal
+/system/vendor/bin/hw/android\.hardware\.power@1\.2-service          u:object_r:hal_power_default_exec:s0
+
+# DT2W
+/sys/android_touch/doubletap2wake                                    u:object_r:proc_touchpanel:s0

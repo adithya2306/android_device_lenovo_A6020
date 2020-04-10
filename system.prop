@@ -1,8 +1,5 @@
 # system.prop for A6020
 
-# Android GO for 2GB RAM
-ro.config.low_ram=true
-
 # Audio
 ro.config.media_vol_steps=25
 ro.config.vc_call_vol_steps=7

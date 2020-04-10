@@ -108,9 +108,6 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
 
             // Trim memory
             property_set("ro.vendor.qti.sys.fw.trim_enable_memory", "2147483648");
-
-            // Disable low ram flag
-            property_set("ro.config.low_ram", "false");
         } else {
             /* Dalvik properties for 1080p/2GB
              *

@@ -180,9 +180,6 @@ on fs
 
     mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
 
-    rm /cache/boot_lc_main.txt
-    start boot_lc_main
-
 on post-fs
     start qseecomd
 
@@ -456,13 +453,6 @@ service qcom-sh /system/vendor/bin/init.qcom.sh
 service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     class late_start
     user root
-    disabled
-    oneshot
-
-service boot_lc_main /system/bin/logcat -f /cache/boot_lc_main.txt
-    class main
-    user root
-    group root system
     disabled
     oneshot
 

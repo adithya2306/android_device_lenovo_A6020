@@ -1,2 +1,4 @@
 allow qti_init_shell toolbox_exec:file { getattr execute read open execute_no_trans };
 allow qti_init_shell proc_touchpanel:dir { rw_dir_perms setattr };
+allow qti_init_shell proc_kernel_sched:file { open write };
+allow qti_init_shell sysfs_net:file write;

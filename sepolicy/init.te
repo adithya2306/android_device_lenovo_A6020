@@ -1,0 +1,8 @@
+allow init debugfs:dir mounton;
+allow init hal_drm_hwservice:hwservice_manager add;
+allow init hal_usb_hwservice:hwservice_manager add;
+allow init hidl_base_hwservice:hwservice_manager add;
+allow init hwservicemanager:binder { call transfer };
+allow init sysfs_leds:lnk_file read;
+allow init system_server:binder call;
+allow init vendor_file:file execute_no_trans;

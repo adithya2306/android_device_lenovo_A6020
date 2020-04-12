@@ -1,2 +1,9 @@
 allow mediaserver sensorservice_service:service_manager find;
-
+allow mediaserver cameraproxy_service:service_manager find;
+allow mediaserver cameraserver_service:service_manager add;
+allow mediaserver fwk_camera_hwservice:hwservice_manager add;
+allow mediaserver hal_camera_hwservice:hwservice_manager find;
+allow mediaserver hal_pa_camera_motor_hwservice:hwservice_manager find;
+allow mediaserver hidl_base_hwservice:hwservice_manager add;
+allow mediaserver qdisplay_service:service_manager find;
+allow mediaserver sensor_privacy_service:service_manager find;

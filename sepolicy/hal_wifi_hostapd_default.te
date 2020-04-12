@@ -1,0 +1,2 @@
+allow hal_wifi_hostapd_default default_android_hwservice:hwservice_manager add;
+allow hal_wifi_hostapd_default wifi_vendor_data_file:dir { remove_name write };

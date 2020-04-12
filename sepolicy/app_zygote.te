@@ -1,0 +1,4 @@
+allow app_zygote app_data_file:dir getattr;
+allow app_zygote ion_device:chr_file getattr;
+allow app_zygote tombstoned_crash_socket:sock_file write;
+allow app_zygote zygote_exec:file read;

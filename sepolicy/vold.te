@@ -1,2 +1,2 @@
 allow vold proc_touchpanel:dir { read open };
-
+allow vold hal_bootctl_hwservice:hwservice_manager find;

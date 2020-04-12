@@ -1,0 +1,4 @@
+allow time_daemon qmuxd:unix_stream_socket connectto;
+allow time_daemon qmuxd_socket:dir { add_name write };
+allow time_daemon qmuxd_socket:sock_file { create write };
+allow time_daemon self:capability dac_override;

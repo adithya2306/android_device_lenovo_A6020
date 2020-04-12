@@ -1,0 +1,4 @@
+allow fsck persist_block_device:blk_file { open read };
+allow fsck persist_file:dir getattr;
+allow fsck self:capability dac_override;
+allow fsck tmpfs:blk_file getattr;

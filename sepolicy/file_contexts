@@ -4,6 +4,8 @@
 # lights hal
 /system/vendor/bin/hw/android\.hardware\.light@2\.0-service.A6020    u:object_r:hal_light_default_exec:s0
 /sys/class/leds(/.*)?                                                u:object_r:sysfs_leds:s0
+/sys/devices/soc\.0/gpio-leds\.[a-z0-9]+/leds(/.*)?                  u:object_r:sysfs_leds:s0
+/sys/devices/soc\.0/qcom,camera-led-flash\.[a-z0-9]+/leds(/.*)?      u:object_r:sysfs_leds:s0
 
 # powerhal
 /system/vendor/bin/hw/android\.hardware\.power@1\.2-service          u:object_r:hal_power_default_exec:s0

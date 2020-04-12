@@ -1,2 +1,7 @@
 get_prop(priv_app, qemu_hw_mainkeys_prop)
-
+allow priv_app device:dir open;
+allow priv_app proc:file open;
+allow priv_app proc_interrupts:file open;
+allow priv_app proc_modules:file open;
+allow priv_app sysfs:file open;
+allow priv_app sysfs_android_usb:file open;

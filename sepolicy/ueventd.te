@@ -1,0 +1,2 @@
+allow ueventd proc:file { getattr open read };
+allow ueventd proc_touchpanel:file relabelto;

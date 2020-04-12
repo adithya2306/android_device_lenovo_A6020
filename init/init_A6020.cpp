@@ -122,6 +122,9 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
 
             // Cached apps limit
             property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "24");
+
+            // Reduce memory footprint
+            property_set("ro.config.avoid_gfx_accel", "true");
         }
     } else {
         // 720p screen density
@@ -140,6 +143,9 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
 
         // Cached apps limit
         property_set("ro.vendor.qti.sys.fw.bg_apps_limit", "26");
+
+        // Reduce memory footprint
+        property_set("ro.config.avoid_gfx_accel", "true");
     }
 
     if (dualsim) {

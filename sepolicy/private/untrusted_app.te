@@ -1,0 +1,7 @@
+allow untrusted_app adbroot_data_file:dir getattr;
+allow untrusted_app adbroot_exec:file getattr;
+allow untrusted_app art_apex_boot_integrity_exec:file getattr;
+allow untrusted_app ashmemd_exec:file getattr;
+allow untrusted_app config_gz:file getattr;
+allow untrusted_app traced_exec:file getattr;
+allow untrusted_app traced_probes_exec:file getattr;

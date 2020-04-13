@@ -45,8 +45,8 @@ persist.camera.cpp.duplication=false
 persist.sys.chgdisabled=0
 
 # Display
-debug.sf.hw=1
-debug.egl.hw=1
+debug.sf.hw=0
+debug.egl.hw=0
 debug.enable.sglscale=1
 debug.mdpcomp.idletime=600
 debug.mdpcomp.logs=0

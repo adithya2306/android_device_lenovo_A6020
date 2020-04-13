@@ -1,1 +1,3 @@
 allow storaged device:file { open write };
+allow storaged debugfs_mmc:dir search;
+allow storaged debugfs_mmc:file read;

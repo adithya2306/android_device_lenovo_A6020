@@ -1,0 +1,2 @@
+allow untrusted_app_27 proc_net:file read;
+allow untrusted_app_27 proc_tty_drivers:file read;

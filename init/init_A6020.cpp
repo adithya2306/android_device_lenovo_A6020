@@ -125,7 +125,7 @@ void configure_variant(bool fhd, bool dualsim = true, bool is3gb = false){
         }
     } else {
         // 720p screen density
-        property_set("ro.sf.lcd_density", "290");
+        property_set("ro.sf.lcd_density", "300");
 
         /* Dalvik properties for 720p/2GB
          *

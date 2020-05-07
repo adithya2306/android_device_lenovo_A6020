@@ -1,0 +1,1 @@
+allow adbd app_data_file:file r_file_perms;

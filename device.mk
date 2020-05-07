@@ -1,4 +1,3 @@
-
 #
 # Copyright (C) 2015-2016 The CyanogenMod Project
 # Copyright (C) 2017 The LineageOS Project
@@ -206,6 +205,7 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm8916 \
+    libmm-qcamera \
     libbson \
     Snap
 

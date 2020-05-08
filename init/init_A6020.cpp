@@ -44,14 +44,16 @@ using android::base::ReadFileToString;
 using android::base::Trim;
 using android::base::GetProperty;
 
+using std::string;
+
 #define ISMATCH(a,b) (!strncmp(a,b,PROP_VALUE_MAX))
 #define CMDLINE_SIZE 1024
 
 static void init_alarm_boot_properties()
 {
     char const *boot_reason_file = "/proc/sys/kernel/boot_reason";
-    std::string boot_reason;
-    std::string alarm_boot = GetProperty("ro.boot.alarmboot","");
+    string boot_reason;
+    string alarm_boot = GetProperty("ro.boot.alarmboot","");
 
     if (ReadFileToString(boot_reason_file, &boot_reason)) {
         /*
@@ -76,7 +78,7 @@ static void init_alarm_boot_properties()
     }
 }
 
-void property_override(std::string prop, std::string value)
+void property_override(string prop, string value)
 {
     auto pi = (prop_info*) __system_property_find(prop.c_str());
 
@@ -173,40 +175,47 @@ void vendor_load_properties()
     strncpy(panel_id, strtok(panelindex + 28, ":"), 32);
 
     // Use A6020a40 as default - SD415/2GB/720p - board_id = "S82918D1"
-    std::string device = "A6020a40";
-    std::string fingerprint = "Lenovo/A6020a40/A6020a40:5.1.1/LMY47V/A6020a40_S102_161123_ROW:user/release-keys";
+    string device = "A6020a40";
+    string fw_variant = "A6020a40";
+    string fingerprint = "Lenovo/A6020a40/A6020a40:5.1.1/LMY47V/A6020a40_S102_161123_ROW:user/release-keys";
 
     // Determine variant and fingerprint
     if (ISMATCH(board_id, "S82918B1")) {
         if (ISMATCH(panel_id, "ili9881c_720p_video") || ISMATCH(panel_id, "hx8394f_boe_720p_video")) {
             // HW39 variant - SD616/2GB/720p
             device = "A6020a40";
+            fw_variant = "A6020a46";
             fingerprint = "Lenovo/A6020a40/A6020a40:5.1.1/LMY47V/A6020a40_S105_161128_ROW:user/release-keys";
             configure_variant(false); // 720p
         } else {
             // SD616/2GB/1080p, panel_id = "otm1901a_tm_1080p_video"
             device = "A6020a46";
+            fw_variant = "A6020a46";
             fingerprint = "Lenovo/A6020a46/A6020a46:5.1.1/LMY47V/A6020a46_S042_160516_ROW:user/release-keys";
             configure_variant(true); // 1080p
         }
     } else if (ISMATCH(board_id, "S82918E1")) {
         // SD415/2GB/720p, single SIM
         device = "A6020a41";
+        fw_variant = "A6020a41";
         fingerprint = "Lenovo/A6020a41/A6020a41:5.1.1/LMY47V/A6020a41_S_S028_160922_ROW:user/release-keys";
         configure_variant(false, false);
     } else if (ISMATCH(board_id, "S82918F1")) {
         // SD616/2GB/1080p, Latin America
         device = "A6020l36";
+        fw_variant = "A6020l36";
         fingerprint = "Lenovo/A6020l36/A6020l36:5.1.1/LMY47V/A6020l36_S042_161209_LAS:user/release-keys";
         configure_variant(true);
     } else if (ISMATCH(board_id, "S82918G1")) {
         // SD616/2GB/1080p, single SIM, Latin America
         device = "A6020l37";
+        fw_variant = "A6020l37";
         fingerprint = "Lenovo/A6020l37/A6020l37:5.1.1/LMY47V/A6020l37_S029_170321_LAS:user/release-keys";
         configure_variant(true, false);
     } else if (ISMATCH(board_id, "S82918H1")) {
         // SD616/3GB/1080p
         device = "A6020a46";
+        fw_variant = "A6020a46";
         fingerprint = "Lenovo/A6020a46/A6020a46:5.1.1/LMY47V/A6020a46_S105_161124_ROW:user/release-keys";
         configure_variant(true, true, true);
     } else {
@@ -215,16 +224,21 @@ void vendor_load_properties()
     }
 
     // Override 'em all props
-    std::string model = "Lenovo " + device;
-    std::string prop_partitions[] = { "", "system.", "vendor." };
+    string model = "Lenovo " + device;
+    string prop_partitions[] = { "", "system.", "vendor." };
 
-    for(const std::string &prop : prop_partitions) {
-        property_override(std::string("ro.product.") + prop + std::string("name"), device);
-        property_override(std::string("ro.product.") + prop + std::string("device"), device);
-        property_override(std::string("ro.product.") + prop + std::string("model"), model);
-        property_override(std::string("ro.") + prop + std::string("build.product"), device);
-        property_override(std::string("ro.") + prop + std::string("build.fingerprint"), fingerprint);
+    for (const string &prop : prop_partitions) {
+        property_override(string("ro.product.") + prop + string("name"), device);
+        property_override(string("ro.product.") + prop + string("device"), device);
+        property_override(string("ro.product.") + prop + string("model"), model);
+        property_override(string("ro.") + prop + string("build.product"), device);
+        property_override(string("ro.") + prop + string("build.fingerprint"), fingerprint);
     }
+
+    // Set variant-specific firmware class path
+    FILE *fd = fopen("/sys/module/firmware_class/parameters/path", "wb");
+    fprintf(fd, "/system/etc/firmware/variant/%s\n", fw_variant.c_str());
+    fclose(fd);
 
     // Init a dummy BT MAC address, will be overwritten later
     property_set("ro.boot.btmacaddr", "00:00:00:00:00:00");

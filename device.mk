@@ -76,10 +76,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     keystore.msm8916
 
-# Firmware patch
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/move_files.sh:install/bin/move_files.sh
-
 # FM
 PRODUCT_PACKAGES += \
     FMRadio \

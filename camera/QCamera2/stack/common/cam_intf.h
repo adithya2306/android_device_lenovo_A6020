@@ -327,6 +327,8 @@ typedef struct{
     uint8_t low_power_mode_supported;
     /* support for YUV over PIX intf */
     uint8_t use_pix_for_SOC;
+
+    volatile char hack[1040384];
 } cam_capability_t;
 
 typedef enum {

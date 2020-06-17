@@ -1,1 +1,3 @@
 type qemu_hw_mainkeys_prop, property_type;
+type vendor_wifi_prop, property_type;
+type vendor_time_service_prop, property_type;

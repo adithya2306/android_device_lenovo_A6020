@@ -1,2 +1,2 @@
-allow hal_wifi_default default_prop:property_service set;
 allow hal_wifi_default proc_net:file write;
+set_prop(hal_wifi_default, vendor_wifi_prop)

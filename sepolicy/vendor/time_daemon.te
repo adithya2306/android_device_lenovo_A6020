@@ -1,4 +1,7 @@
 allow time_daemon qmuxd:unix_stream_socket connectto;
 allow time_daemon qmuxd_socket:dir { add_name write };
 allow time_daemon qmuxd_socket:sock_file { create write };
-allow time_daemon self:capability dac_override;
+allow time_daemon vendor_time_data_file:file create_file_perms;
+allow time_daemon vendor_time_data_file:dir w_dir_perms;
+
+get_prop(time_daemon, vendor_time_service_prop)

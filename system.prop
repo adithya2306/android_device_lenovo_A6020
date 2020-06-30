@@ -68,12 +68,17 @@ drm.service.enabled=1
 
 # IMS
 persist.dbg.volte_avail_ovr=1
-persist.dbg.vt_avail_ovr=0
+persist.dbg.vt_avail_ovr=1
 persist.dbg.wfc_avail_ovr=0
 persist.ims.disableADBLogs=1
 persist.ims.disableDebugLogs=1
 persist.ims.disableIMSLogs=1
 persist.ims.disableQXDMLogs=1
+persist.radio.NO_STAPA=1
+persist.radio.ROTATION_ENABLE=1
+persist.radio.VT_CAM_INTERFACE=1
+persist.radio.VT_ENABLE=1
+persist.radio.VT_HYBRID_ENABLE=1
 
 # LMKD
 ro.lmk.low=1001

@@ -422,6 +422,25 @@ service imsdatadaemon /system/vendor/bin/imsdatadaemon
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
+service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
+   class main
+   user radio
+   socket ims_rtpd stream 0660 system radio
+   group radio net_raw diag  log oem_2950
+   writepid /dev/cpuset/system-background/tasks
+   disabled
+
+service imscmservice /system/vendor/bin/imscmservice
+   class main
+   user radio
+   group radio net_raw diag log oem_2950
+   writepid /dev/cpuset/system-background/tasks
+   disabled
+
+on property:sys.ims.DATA_DAEMON_STATUS=1
+    start ims_rtp_daemon
+    start imscmservice
+
 service per_mgr /system/vendor/bin/pm-service
     class core
     user system

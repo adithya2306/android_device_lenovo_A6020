@@ -268,7 +268,7 @@ service qseecomd /system/vendor/bin/qseecomd
     disabled
     writepid /dev/cpuset/system-background/tasks
 
-service thermal-engine /system/vendor/bin/thermal-engine
+service thermal-engine /system/vendor/bin/thermal-engine -c /system/vendor/etc/thermal-engine.conf
     class main
     user root
     socket thermal-send-client stream 0666 system system

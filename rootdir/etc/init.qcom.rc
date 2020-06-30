@@ -428,6 +428,19 @@ service per_mgr /system/vendor/bin/pm-service
     group system net_raw
     writepid /dev/cpuset/system-background/tasks
 
+service atfwd /system/vendor/bin/ATFWD-daemon
+    class late_start
+    user system
+    disabled
+    group system radio
+    writepid /dev/cpuset/system-background/tasks
+
+on property:persist.radio.atfwd.start=false
+    stop atfwd
+
+on property:radio.atfwd.start=false
+    stop atfwd
+
 service ppd /system/vendor/bin/mm-pp-daemon
     class late_start
     disabled
@@ -465,8 +478,8 @@ service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     oneshot
 
 on property:sys.boot_completed=1
-    start qcom-sh
     start qcom-post-boot
+    start atfwd
     setprop sys.io.scheduler "cfq"
     restart cameraserver
 

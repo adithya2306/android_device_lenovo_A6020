@@ -53,10 +53,6 @@ PRODUCT_ART_TARGET_INCLUDE_DEBUG_BUILD := false
 #    Settings \
 #    SystemUI
 
-# Dirac
-PRODUCT_PACKAGES += \
-    Dirac
-
 # Display
 PRODUCT_PACKAGES += \
     gralloc.msm8916 \

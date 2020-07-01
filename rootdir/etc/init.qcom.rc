@@ -26,7 +26,6 @@
 #
 
 import /system/vendor/etc/init/hw/init.qcom.usb.rc
-import /system/vendor/etc/init/hw/init.safailnet.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -289,7 +288,7 @@ service power_off_alarm /system/vendor/bin/power_off_alarm
     disabled
     oneshot
 
-service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
+service irsc_util /system/vendor/bin/irsc_util "/system/vendor/etc/sec_config"
     class main
     user root
     oneshot

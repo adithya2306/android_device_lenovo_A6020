@@ -11,6 +11,7 @@ persist.vendor.audio.fluence.voicerec=false
 persist.vendor.audio.fluence.speaker=false
 vendor.voice.path.for.pcm.voip=true
 vidc.enc.narrow.searchrange=1
+vendor.audio.pp.asphere.enabled=true
 vendor.audio.tunnel.encode=false
 vendor.voice.playback.conc.disabled=true
 vendor.voice.record.conc.disabled=true
